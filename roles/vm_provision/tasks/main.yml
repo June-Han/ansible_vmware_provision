@@ -1,0 +1,10 @@
+---
+# tasks file for vm_provision
+- name: get VM info
+  community.vmware.vmware_guest_info:
+    hostname: "{{ vcenter_hostname }}"
+  register: vm_info
+
+- name: Print VM info
+  ansible.builtin.debug:
+    var: vm_info
