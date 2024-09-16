@@ -1,0 +1,11 @@
+- name: Get a particular VM info
+  community.vmware.vmware_guest_info:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ vm_name }}"
+    folder: "{{ vm_folder }}"
+  register: vm_info
+
+- name: Print the particular VM info
+  ansible.builtin.debug:
+    var: vm_info

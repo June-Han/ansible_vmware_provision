@@ -1,0 +1,32 @@
+- name: Provision a new vm from scratch
+  community.vmware.vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    folder: "{{ vm_folder }}"
+    name: "{{ fresh_prov }}"
+    state: poweredon
+    guest_id: "{{ fresh_os }}"
+    #esxi_hostname: #Set either esxi or cluster
+    cluster: "{{ cluster_name }}"
+    disk:
+    - size_gb: 2
+      type: thin
+      autoselect_datastore: true # To select the data store that is the least utilized
+      # datastore: # To manually select datastore available (written in the vars of this role)
+    hardware:
+      memory_mb: 512
+      num_cpus: 4
+      scsi: paravirtual
+    networks:
+    - name: segment-sandbox-qzqxj #Name of the portgroup or distributed virtual portgroup for this interface.
+      mac: 00:50:56:8e:36:d5
+      #ip:  #Used to set static IP
+      #netmask: #Used to set static netmask required for ip
+      device_type: vmxnet3 #vmxnet3 by default
+    #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
+    #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
+  register: deploy_vm
+
+- name: Print the particular VM info
+  ansible.builtin.debug:
+    var: deploy_vm

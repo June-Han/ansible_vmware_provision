@@ -17,3 +17,6 @@ datastore2: workload_share_dwPsq
 datastore3: workload_share_Q6pSF
 datastore4: workload_share_SYmuF
 datastore5: workload_share_yBaQN
+
+# Cluster name (Open Env)
+cluster_name: Cluster-1

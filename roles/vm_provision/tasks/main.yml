@@ -1,50 +1,15 @@
 ---
-# tasks file for vm_provision
-- name: Get a particular VM info
-  community.vmware.vmware_guest_info:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    name: "{{ vm_name }}"
-    folder: "{{ vm_folder }}"
-  register: vm_info
-
-- name: Print the particular VM info
-  ansible.builtin.debug:
-    var: vm_info
+- name: Get a particular vm info 
+  ansible.builtin.include_tasks:
+    file: vm_info.yml
 
 - name: Provision a new vm from scratch
-  community.vmware.vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
-    name: "{{ fresh_prov }}"
-    state: poweredon
-    guest_id: "{{ fresh_os }}"
-    #esxi_hostname: #Set either esxi or cluster
-    cluster: Cluster-1
-    disk:
-    - size_gb: 10
-      type: thin
-      autoselect_datastore: true # To select the data store that is the least utilized
-      # datastore: # To manually select datastore available (written in the vars of this role)
-    hardware:
-      memory_mb: 512
-      num_cpus: 4
-      scsi: paravirtual
-    networks:
-    - name: segment-sandbox-qzqxj #Name of the portgroup or distributed virtual portgroup for this interface.
-      mac: 00:50:56:8e:36:d5
-      #ip:  #Used to set static IP
-      #netmask: #Used to set static netmask required for ip
-      device_type: vmxnet3 #vmxnet3 by default
-    wait_for_ip_address: true
-    wait_for_ip_address_timeout: 600
-  register: deploy_vm
+  ansible.builtin.include_tasks:
+    file: fresh_provision.yml
 
-- name: Print the particular VM info
-  ansible.builtin.debug:
-    var: deploy_vm
-
-#- name: Provision VM from templates
+- name: Provision VM based on X number of templates
+  ansible.builtin.include_tasks:
+    file: template_provision.yml
+  loop: "{{ template_name }}"
 
 #- name: Provision VM from OVA
