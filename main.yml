@@ -6,4 +6,7 @@
     - name: Include VM provisioning role
       ansible.builtin.include_role:
         name: vm_provision
-    
+
+    - name: Debug message from AAP
+      ansible.builtin.debug:
+        msg: "VM ware provisioning main playbook file"
