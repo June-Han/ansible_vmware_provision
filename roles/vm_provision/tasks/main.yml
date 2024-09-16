@@ -10,6 +10,9 @@
 - name: Provision VM based on X number of templates
   ansible.builtin.include_tasks:
     file: template_provision.yml
-  loop: "{{ template_name }}"
+  vars:
+    template_prov: item.template_prov
+    template_name: item.template_name
+  loop: "{{ template_prov_list }}"
 
 #- name: Provision VM from OVA

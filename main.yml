@@ -9,12 +9,12 @@
       vars: 
         fresh_prov: testvm2 # Name of the VM (Deployment from scratch)
         fresh_os: rhel8_64Guest # OS for the VM (Deployment from scratch)
-        template_prov: testvm3 # Name of the VM (Deployment from template)
-        template_os: rhel8_64Guest # OS for the VM (Deployment from template)
+
+        #template_prov: testvm3 # Name of the VM (Deployment from template)
         #template_name: rhel86-tpl # Name of template (Deployment from template)
-        template_name:
-          - rhel86-tpl
-          - roadshow-tpl-winweb01
+        template_prov_list: 
+          - { template_prov: test_vm3, template_name: rhel86-tpl}
+          - { template_prov: test_vm4, template_name: roadshow-tpl-winweb01}
 
     - name: Debug message from AAP
       ansible.builtin.debug:

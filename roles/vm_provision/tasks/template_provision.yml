@@ -5,10 +5,9 @@
     folder: "{{ vm_folder }}"
     name: "{{ template_prov }}"
     state: poweredon
-    guest_id: "{{ template_os }}"
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
-    template:  #Template or existing VM used to create new virtual machine
+    template: "{{ template_name }}"  #Template or existing VM used to create new virtual machine
     disk:
     - size_gb: 2
       type: thin
@@ -27,6 +26,6 @@
       mac: 00:50:56:8e:36:d5
   register: deploy_vm
 
-- name: Print the particular VM info
+- name: Print the VM info deployed from template
   ansible.builtin.debug:
     var: deploy_vm
