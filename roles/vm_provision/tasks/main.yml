@@ -5,7 +5,7 @@
     hostname: "{{ vcenter_hostname }}"
     datacenter: "vcenter_datacenter"
     name: "{{ vm_name }}"
-    folder: "{{ Workloads/sandbox-qzqxj }}"
+    folder: "{{ folder }}"
   register: vm_info
 
 - name: Print VM info
