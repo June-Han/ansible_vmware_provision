@@ -3,6 +3,9 @@
 - name: get VM info
   community.vmware.vmware_guest_info:
     hostname: "{{ vcenter_hostname }}"
+    datacenter: "vcenter_datacenter"
+    name: "{{ vm_name }}"
+    folder: "{{ Workloads/sandbox-qzqxj }}"
   register: vm_info
 
 - name: Print VM info
