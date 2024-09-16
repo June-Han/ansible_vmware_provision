@@ -1,11 +1,14 @@
 ---
 - name: Provision a RHEL VM in VMware
-  hosts: all
+  hosts: localhost
   gather_facts: false
   tasks:
     - name: Include VM provisioning role
       ansible.builtin.include_role:
         name: vm_provision
+      vars: 
+        fresh_prov: testvm2
+        fresh_os: rhel8_64Guest
 
     - name: Debug message from AAP
       ansible.builtin.debug:
