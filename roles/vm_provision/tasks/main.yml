@@ -3,7 +3,7 @@
 - name: Get a particular VM info
   community.vmware.vmware_guest_info:
     hostname: "{{ vcenter_hostname }}"
-    datacenter: "vcenter_datacenter"
+    datacenter: "{{ vcenter_datacenter }}"
     name: "{{ vm_name }}"
     folder: "{{ vm_folder }}"
   register: vm_info
@@ -12,9 +12,10 @@
   ansible.builtin.debug:
     var: vm_info
 
-- name: provision a new vm from scratch
+- name: Provision a new vm from scratch
   community.vmware.vmware_guest:
     hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vm_folder }}"
     name: "{{ fresh_prov }}"
     state: poweredon
@@ -38,3 +39,7 @@
     wait_for_ip_address: true
     wait_for_ip_address_timeout: 600
   register: deploy_vm
+
+- name: Provision VM from templates
+
+- name: Provision VM from OVA
