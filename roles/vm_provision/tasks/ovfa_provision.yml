@@ -5,4 +5,4 @@
     folder: "{{ vm_folder }}"
     cluster: "{{ cluster_name }}"
     datastore: datastore1
-    ovf:
+    ovf: rhel86-tpl #roadshow-tpl-database
