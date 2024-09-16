@@ -8,9 +8,6 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     template: "{{ template_name }}"  #Template or existing VM used to create new virtual machine
-    disk:
-    - type: thin
-      autoselect_datastore: true 
     hardware:
       memory_mb: 512
       num_cpus: 4
