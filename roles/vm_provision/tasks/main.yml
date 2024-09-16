@@ -40,6 +40,6 @@
     wait_for_ip_address_timeout: 600
   register: deploy_vm
 
-- name: Provision VM from templates
+#- name: Provision VM from templates
 
-- name: Provision VM from OVA
+#- name: Provision VM from OVA
