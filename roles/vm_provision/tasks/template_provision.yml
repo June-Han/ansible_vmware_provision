@@ -8,19 +8,6 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     template: "{{ template_name }}"  #Template or existing VM used to create new virtual machine
-    disk:
-    - size_gb: 2
-      type: thin
-      autoselect_datastore: true 
-    hardware:
-      memory_mb: 512
-      num_cpus: 4
-      scsi: paravirtual
-      mem_reservation: 4096
-      cpu_shares_level: "high"
-      mem_shares_level: "high"
-      cpu_limit: 8096
-      cpu_reservation: 4096
     networks:
     - name: segment-sandbox-qzqxj #Name of the portgroup or distributed virtual portgroup for this interface.
       mac: 00:50:56:8e:36:d5
