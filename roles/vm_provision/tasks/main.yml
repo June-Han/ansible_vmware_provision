@@ -11,8 +11,8 @@
   ansible.builtin.include_tasks:
     file: template_provision.yml
   vars:
-    template_prov: item.template_prov
-    template_name: item.template_name
+    template_prov: "{{ item.template_prov }}"
+    template_name: "{{ item.template_name }}"
   loop: "{{ template_prov_list }}"
 
 #- name: Provision VM from OVA

@@ -1,0 +1,8 @@
+- name: Provision VM based from OVA
+  community.vmware.vmware_deploy_ovf:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    folder: "{{ vm_folder }}"
+    cluster: "{{ cluster_name }}"
+    datastore: datastore1
+    ovf:
