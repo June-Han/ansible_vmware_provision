@@ -20,7 +20,8 @@
     name: "{{ fresh_prov }}"
     state: poweredon
     guest_id: "{{ fresh_os }}"
-    esxi_hostname:
+    #esxi_hostname: #Set either esxi or cluster
+    cluster: Cluster-1
     disk:
     - size_gb: 10
       type: thin
@@ -31,7 +32,7 @@
       num_cpus: 4
       scsi: paravirtual
     networks:
-    - name: VM networks
+    - name: segment-sandbox-qzqxj #Name of the portgroup or distributed virtual portgroup for this interface.
       mac: 00:50:56:8e:36:d5
       #ip:  #Used to set static IP
       #netmask: #Used to set static netmask required for ip
@@ -39,6 +40,10 @@
     wait_for_ip_address: true
     wait_for_ip_address_timeout: 600
   register: deploy_vm
+
+- name: Print the particular VM info
+  ansible.builtin.debug:
+    var: deploy_vm
 
 #- name: Provision VM from templates
 

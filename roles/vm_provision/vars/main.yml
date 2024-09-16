@@ -6,12 +6,12 @@ vcenter_validate_certs: false
 vm_folder: Workloads/sandbox-qzqxj
 vm_name: testvm1
 
-# List of Hypervisors in the redhat demop
+# List of Hypervisors in the redhat demo (Open Env)
 esxi_host1: esxi-01000.infra.demo.redhat.com
 esxi_host2: esxi-01001.infra.demo.redhat.com
 esxi_host3: esxi-01002.infra.demo.redhat.com
 
-# List of datastores 
+# List of datastores in the redhat demo (Open Env)
 datastore1: workload_share_dwPsq
 datastore2: workload_share_dwPsq
 datastore3: workload_share_Q6pSF
