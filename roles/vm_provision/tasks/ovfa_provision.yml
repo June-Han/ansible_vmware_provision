@@ -9,7 +9,7 @@
     ovf: "[{{ datastore1 }}] iso/rhcos-4.14.15-x86_64-vmware.x86_64.ova" #roadshow-tpl-database
     networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
-  delegate_to: "{{ vcenter_hostname }}"
+  delegate_to: 192.168.27.0
 
 - name: Move Virtual Machine
   community.vmware.vmware_guest_move:
