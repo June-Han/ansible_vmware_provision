@@ -1,5 +1,4 @@
 ---
-
 - name: Remove VM from the vCenter inventory
   ansible.builtin.include_tasks:
     file: remove_vm.yml
@@ -12,7 +11,7 @@
     file: fresh_provision.yml
   vars:
     fresh_prov: "{{ item.fresh_prov }}"
-    fresh_os: "{{ item.fresh_os }}"\
+    fresh_os: "{{ item.fresh_os }}"
   loop: "{{ fresh_prov_list }}"
 
 - name: Get a particular vm info 
