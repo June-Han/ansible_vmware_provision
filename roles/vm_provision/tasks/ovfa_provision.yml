@@ -7,7 +7,7 @@
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
-    networks: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+    networks: "{{ network_vars }}" #Name of the portgroup or distributed virtual portgroup for this interface.
   register: ovaftestvm
   delegate_to: localhost
 
