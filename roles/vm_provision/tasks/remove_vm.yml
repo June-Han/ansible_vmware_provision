@@ -8,4 +8,9 @@
     delete_from_inventory: true
     state: absent
     force: true
+  register: vm_del_name
   delegate_to: localhost
+
+- name: Print the VM info deployed from scratch
+  ansible.builtin.debug:
+    var: vm_del_name
