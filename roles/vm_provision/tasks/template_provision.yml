@@ -22,8 +22,8 @@
       cpu_limit: 8096
       cpu_reservation: 4096
     networks:
-    - name: segment-sandbox-qzqxj #Name of the portgroup or distributed virtual portgroup for this interface.
-      mac: 00:50:56:8e:36:d5
+    - name: network_vars['name'] #Name of the portgroup or distributed virtual portgroup for this interface.
+      mac: network_vars['mac']
     cdrom:
     - controller_number: 0
       iso_path: "[{{ vcenter_datastore }}] /iso/{{ iso_name }}"
