@@ -1,6 +1,6 @@
 ---
 - name: Provision a RHEL VM in VMware
-  hosts: localhost
+  hosts: all
   gather_facts: false
   tasks:
     - name: Include VM provisioning role
