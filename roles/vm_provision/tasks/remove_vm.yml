@@ -11,6 +11,6 @@
   register: vm_del_name
   delegate_to: localhost
 
-- name: Print the VM info deployed from scratch
+- name: Print the VM info of VMs deleted.
   ansible.builtin.debug:
     var: vm_del_name

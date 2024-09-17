@@ -27,7 +27,7 @@
   ansible.builtin.include_tasks:
     file: clone_vm.yml
   vars:
-    vm_name: testvm1_rhel9
+    clone_name: testvm1_rhel9
     clone_parent: "{{ fresh_prov }}"
 
 - name: Provision VM base on OVA

@@ -2,7 +2,7 @@
   community.vmware.vmware_guest_info:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
-    name: "{{ vm_name }}"
+    name: "{{ vminfo_name }}"
     folder: "{{ vm_folder }}"
   register: vm_info
 
