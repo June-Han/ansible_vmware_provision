@@ -7,4 +7,9 @@
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
+  register: ovaftestvm
   delegate_to: localhost
+
+- name: Print the VM info deployed from OVA
+  ansible.builtin.debug:
+    var: ovaftestvm
