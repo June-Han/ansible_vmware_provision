@@ -4,5 +4,7 @@
     datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vm_folder }}"
     cluster: "{{ cluster_name }}"
+    datastore: "{{ datastore1 }}"
+    name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
   delegate_to: localhost

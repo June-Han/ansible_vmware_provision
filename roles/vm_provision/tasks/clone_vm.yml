@@ -1,0 +1,19 @@
+- name: Instant Clone a VM
+  community.vmware.vmware_guest_instant_clone:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    validate_certs: false
+    folder: "{{ vm_folder }}"
+    name: "{{ vm_name }}"
+    parent_vm: "{{ clone_parent }}"
+  register: vm_clone
+  delegate_to: localhost
+
+- name: Clone a virtual machine and convert it to a template
+  community.vmware.vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ vm_name }}"
+    folder: "{{ vm_folder }}"
+    cluster: "{{ cluster_name }}"
+    is_template: true

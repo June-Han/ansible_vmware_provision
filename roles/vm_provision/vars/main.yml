@@ -13,7 +13,7 @@ esxi_host3: esxi-01002.infra.demo.redhat.com
 
 # List of datastores in the redhat demo (Open Env)
 datastore1: workload_share_dwPsq
-datastore2: workload_share_dwPsq
+datastore2: workload_share_FZZZD
 datastore3: workload_share_Q6pSF
 datastore4: workload_share_SYmuF
 datastore5: workload_share_yBaQN

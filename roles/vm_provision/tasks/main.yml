@@ -20,7 +20,15 @@
 #   vars:
 #     template_prov: "{{ item.template_prov }}"
 #     template_name: "{{ item.template_name }}"
+#     iso_name: "{{ item.iso_name }}"
 #   loop: "{{ template_prov_list }}"
+
+- name: Instant clone and convert VM to template
+  ansible.builtin.include_tasks:
+    file: clone_vm.yml
+  vars:
+    vm_name: testvm1_rhel9
+    clone_parent: fresh_prov
 
 - name: Provision VM from OVA
   ansible.builtin.include_tasks:

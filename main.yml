@@ -14,13 +14,14 @@
         #template_name: rhel86-tpl # Name of template (Deployment from template)
 
         template_prov_list: #Using a hash list
-          - { template_prov: test_vm3, template_name: testvm1_rhel9}
-          - { template_prov: test_vm4, template_name: testvm2_rhel8}
+          - { template_prov: testvm3, template_name: testvm1_rhel9, iso_name: rhel-9.2-x86_64-dvd.iso}
+          - { template_prov: testvm4, template_name: testvm2_rhel8, iso_name: rhel-8.9-x86_64-dvd.iso}
         
         del_vm_list: 
-          - test_vm1
-          - test_vm2
-          - test_vm3
+          - testvm1
+          - testvm2
+          - testvm3
+          - testvm4
 
     - name: Debug message from AAP
       ansible.builtin.debug:
