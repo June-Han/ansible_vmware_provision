@@ -4,7 +4,7 @@
     datacenter: "{{ vcenter_datacenter }}"
     cluster: "{{ cluster_name }}"
     folder: "{{ vm_folder }}"
-    # datastore: "{{ datastore1 }}"
+    datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
     # networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
