@@ -18,8 +18,8 @@
       num_cpus: 4
       scsi: paravirtual
     networks:
-    - name: network_vars['name'] #Name of the portgroup or distributed virtual portgroup for this interface.
-      mac: network_vars['mac']
+    - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+      mac: "{{ network_vars['mac']}}"
       #ip:  #Used to set static IP
       #netmask: #Used to set static netmask required for ip
       device_type: vmxnet3 #vmxnet3 by default
