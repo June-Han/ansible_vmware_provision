@@ -2,13 +2,21 @@
   community.vmware.vmware_deploy_ovf:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
     cluster: "{{ cluster_name }}"
+    # folder: "{{ vm_folder }}"
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
     networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
+  delegate_to: localhost
+
+- name: Move Virtual Machine
+  community.vmware.vmware_guest_move:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: ovaftestvm
+    dest_folder: "{{ vm_folder }}"
   delegate_to: localhost
 
 - name: Print the VM info deployed from OVA
