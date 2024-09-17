@@ -9,12 +9,22 @@
     datastore: "{{ datastore3 }}"
     host: "{{ esxi_host2 }}"
   register: vm_clone
+  delegate_to: localhost
+
+- name: set state to poweroff the Cloned VM
+  community.vmware.vmware_guest_powerstate:
+    validate_certs: false
+    hostname: "{{ vcenter_hostname }}"
+    name: "{{ clone_name }}"
+    folder: "{{ vm_folder }}"
+    state: powered-off
+  delegate_to: localhost
 
 - name: Print the VM info from cloned VM
   ansible.builtin.debug:
     var: vm_clone
 
-- name: Convert cloned VM to a template
+- name: Convert cloned VM to a template (unable to re-config)
   community.vmware.vmware_guest:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
@@ -22,13 +32,6 @@
     folder: "{{ vm_folder }}"
     cluster: "{{ cluster_name }}"
     is_template: true
-    # disk:
-    # - size_gb: 20
-    #   type: thin
-    #   autoselect_datastore: true 
-    # networks:
-    # - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
-    #   mac: "{{ network_vars['mac']}}"
   register: vm_clone_template
 
 - name: Convert cloned VM to template
