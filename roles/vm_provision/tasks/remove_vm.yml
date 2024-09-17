@@ -1,8 +1,10 @@
-- name: Provision VM based from OVA
-  community.vmware.vmware_deploy_ovf:
+- name: Remove a virtual machine from inventory
+  community.vmware.vmware_guest:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
     folder: "{{ vm_folder }}"
+    name: "{{ vm_del_name }}"
     cluster: "{{ cluster_name }}"
-    ovf: rhel86-tpl #roadshow-tpl-database
+    delete_from_inventory: true
+    state: absent
   delegate_to: localhost

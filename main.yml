@@ -16,6 +16,11 @@
         template_prov_list: #Using a hash list
           - { template_prov: test_vm3, template_name: testvm1_rhel9}
           - { template_prov: test_vm4, template_name: testvm2_rhel8}
+        
+        del_vm_list: 
+          - test_vm1
+          - test_vm2
+          - test_vm3
 
     - name: Debug message from AAP
       ansible.builtin.debug:

@@ -3,6 +3,13 @@
   ansible.builtin.include_tasks:
     file: vm_info.yml
 
+- name: Remove VM from the vCenter inventory
+  ansible.builtin.include_tasks:
+    file: remove_vm.yml
+  vars:
+    vm_del_name: "{{ item }}"
+  loop: "{{ del_vm_list }}"
+
 - name: Provision a new vm from scratch
   ansible.builtin.include_tasks:
     file: fresh_provision.yml
@@ -15,4 +22,6 @@
     template_name: "{{ item.template_name }}"
   loop: "{{ template_prov_list }}"
 
-#- name: Provision VM from OVA
+- name: Provision VM from OVA
+  ansible.builtin.include_tasks:
+    file: ovfa_provision.yml
