@@ -3,21 +3,19 @@
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
     cluster: "{{ cluster_name }}"
-    # folder: "{{ vm_folder }}"
+    folder: "{{ vm_folder }}"
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: "[{{ datastore1 }}] iso/rhcos-4.14.15-x86_64-vmware.x86_64.ova" #roadshow-tpl-database
     networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
-  delegate_to: localhost
 
-- name: Move Virtual Machine
-  community.vmware.vmware_guest_move:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    name: ovaftestvm
-    dest_folder: "{{ vm_folder }}"
-  delegate_to: localhost
+# - name: Move Virtual Machine
+#   community.vmware.vmware_guest_move:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     name: ovaftestvm
+#     dest_folder: "{{ vm_folder }}"
 
 - name: Print the VM info deployed from OVA
   ansible.builtin.debug:
