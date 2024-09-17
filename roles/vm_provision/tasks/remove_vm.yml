@@ -7,4 +7,5 @@
     cluster: "{{ cluster_name }}"
     delete_from_inventory: true
     state: absent
+    force: true
   delegate_to: localhost
