@@ -1,5 +1,5 @@
 - name: Provision VM based on OVA
-  community.vmware.vmware_deploy_ovf_template:
+  community.vmware.vmware_content_deploy_ovf_template:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
     cluster: "{{ cluster_name }}"
@@ -7,7 +7,7 @@
     # datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
-    networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
+    # networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
 
 - name: Move Virtual Machine (if folder not found)
