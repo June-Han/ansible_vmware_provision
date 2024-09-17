@@ -6,6 +6,8 @@
     folder: "{{ vm_folder }}"
     name: "{{ vm_name }}"
     parent_vm: "{{ clone_parent }}"
+    datastore: "{{ datastore3 }}"
+    host: "{{ esxi_host2 }}"
   register: vm_clone
   delegate_to: localhost
 
