@@ -1,4 +1,4 @@
-- name: Provision VM based from OVA
+- name: Provision VM based on OVA
   community.vmware.vmware_deploy_ovf:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
@@ -7,6 +7,9 @@
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
+    networks:
+    - name: "{{ network_vars.name }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+      mac: "{{ network_vars.mac}}"
   register: ovaftestvm
   delegate_to: localhost
 
