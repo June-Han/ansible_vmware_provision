@@ -21,7 +21,7 @@ datastore5: workload_share_yBaQN
 # Cluster name (Open Env)
 cluster_name: Cluster-1
 
-# Network variables
+# Network variables (dictionary)
 network_vars:
-  - name: segment-sandbox-qzqxj
+    name: segment-sandbox-qzqxj
     mac: 00:50:56:8e:36:d5

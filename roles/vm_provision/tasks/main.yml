@@ -30,6 +30,6 @@
     vm_name: testvm1_rhel9
     clone_parent: "{{ fresh_prov }}"
 
-- name: Provision VM from OVA
+- name: Provision VM base on OVA
   ansible.builtin.include_tasks:
     file: ovfa_provision.yml
