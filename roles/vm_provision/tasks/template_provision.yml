@@ -9,7 +9,7 @@
     cluster: "{{ cluster_name }}"
     template: "{{ template_name }}"  #Template or existing VM used to create new virtual machine
     disk:
-    - size_tb: 2
+    - size_gb: 2
       type: thin
       autoselect_datastore: true 
     hardware:
