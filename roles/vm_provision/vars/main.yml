@@ -4,7 +4,7 @@ vcenter_hostname: vcsnsx-vc.infra.demo.redhat.com
 vcenter_datacenter: SDDC-Datacenter
 vcenter_validate_certs: false
 vm_folder: Workloads/sandbox-qzqxj
-vm_name: "{{ fresh_prov }}"
+vm_name: testvm2
 
 # List of Hypervisors in the redhat demo (Open Env)
 esxi_host1: esxi-01000.infra.demo.redhat.com
