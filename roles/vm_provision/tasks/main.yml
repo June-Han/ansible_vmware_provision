@@ -15,9 +15,9 @@
   ansible.builtin.include_tasks:
     file: vm_info.yml
 
-- name: Instant clone and convert VM to template
-  ansible.builtin.include_tasks:
-    file: clone_vm.yml
+# - name: Instant clone and convert VM to template
+#   ansible.builtin.include_tasks:
+#     file: clone_vm.yml
 
 # - name: Provision VM based on X number of templates
 #   ansible.builtin.include_tasks:
