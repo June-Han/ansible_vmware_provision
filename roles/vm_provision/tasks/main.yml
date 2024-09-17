@@ -1,7 +1,4 @@
 ---
-- name: Get a particular vm info 
-  ansible.builtin.include_tasks:
-    file: vm_info.yml
 
 - name: Remove VM from the vCenter inventory
   ansible.builtin.include_tasks:
@@ -13,6 +10,10 @@
 - name: Provision a new vm from scratch
   ansible.builtin.include_tasks:
     file: fresh_provision.yml
+
+- name: Get a particular vm info 
+  ansible.builtin.include_tasks:
+    file: vm_info.yml
 
 # - name: Provision VM based on X number of templates
 #   ansible.builtin.include_tasks:
