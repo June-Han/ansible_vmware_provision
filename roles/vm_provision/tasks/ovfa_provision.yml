@@ -1,31 +1,31 @@
-# - name: Provision VM based on OVA
-#   community.vmware.vmware_deploy_ovf_template:
-#     hostname: "{{ vcenter_hostname }}"
-#     datacenter: "{{ vcenter_datacenter }}"
-#     cluster: "{{ cluster_name }}"
-#     folder: "{{ vm_folder }}"
-#     datastore: "{{ datastore1 }}"
-#     name: ovaftestvm
-#     ovf: "[{{ datastore1 }}] iso/rhcos-4.14.15-x86_64-vmware.x86_64.ova" #roadshow-tpl-database
-#     networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
-#   register: ovaftestvm
-
-# - name: Move Virtual Machine (if folder not found)
-#   community.vmware.vmware_guest_move:
-#     hostname: "{{ vcenter_hostname }}"
-#     datacenter: "{{ vcenter_datacenter }}"
-#     name: ovaftestvm
-#     dest_folder: "{{ vm_folder }}"
-
-- name: Deploy Virtual Machine from template in content library
-  community.vmware.vmware_content_deploy_template:
-    hostname: '{{ vcenter_hostname }}'
-    ovf_template: rhel86-tpl
-    folder: "{{ vm_folder }}"
+- name: Provision VM based on OVA
+  community.vmware.vmware_deploy_ovf_template:
+    hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
-    name: ovf_tpl_vm
-    state: present
-  delegate_to: localhost
+    cluster: "{{ cluster_name }}"
+    folder: "{{ vm_folder }}"
+    # datastore: "{{ datastore1 }}"
+    name: ovaftestvm
+    ovf: rhel86-tpl #roadshow-tpl-database
+    networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
+  register: ovaftestvm
+
+- name: Move Virtual Machine (if folder not found)
+  community.vmware.vmware_guest_move:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: ovaftestvm
+    dest_folder: "{{ vm_folder }}"
+
+# - name: Deploy Virtual Machine from template in content library
+#   community.vmware.vmware_content_deploy_template:
+#     hostname: '{{ vcenter_hostname }}'
+#     template: rhel86-tpl
+#     folder: "{{ vm_folder }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     name: ovf_tpl_vm
+#     state: present
+#   delegate_to: localhost
 
 - name: Print the VM info deployed from OVA
   ansible.builtin.debug:
