@@ -27,8 +27,8 @@
     #   type: thin
     #   autoselect_datastore: true 
     # networks:
-    # - name: "{{ network_vars.name }}" #Name of the portgroup or distributed virtual portgroup for this interface.
-    #   mac: "{{ network_vars.mac}}"
+    # - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+    #   mac: "{{ network_vars['mac']}}"
   register: vm_clone_template
 
 - name: Convert cloned VM to template

@@ -22,6 +22,9 @@
           - testvm2
           - testvm3
           - testvm4
+        
+        clone_name: clone_test
+        clone_parent: "{{ fresh_prov }}"
 
     - name: Debug message from AAP
       ansible.builtin.debug:

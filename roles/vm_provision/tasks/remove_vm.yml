@@ -8,9 +8,9 @@
     delete_from_inventory: true
     state: absent
     force: true
-  register: vm_del_name
+  register: deleted_vm
   delegate_to: localhost
 
 - name: Print the VM info of VMs deleted.
   ansible.builtin.debug:
-    var: vm_del_name
+    var: deleted_vm

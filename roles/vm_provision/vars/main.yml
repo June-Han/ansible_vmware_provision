@@ -23,5 +23,5 @@ cluster_name: Cluster-1
 
 # Network variables (dictionary)
 network_vars:
-    name: segment-sandbox-qzqxj
-    mac: 00:50:56:8e:36:d5
+    name: segment-sandbox-qckg8 #segment-sandbox-qzqxj
+    mac: 00:50:56:8e:11:44 #00:50:56:8e:36:d5

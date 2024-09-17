@@ -26,9 +26,6 @@
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
     file: clone_vm.yml
-  vars:
-    clone_name: testvm1_rhel9
-    clone_parent: "{{ fresh_prov }}"
 
 - name: Provision VM base on OVA
   ansible.builtin.include_tasks:
