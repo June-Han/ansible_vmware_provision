@@ -3,7 +3,7 @@
 vcenter_hostname: vcsnsx-vc.infra.demo.redhat.com
 vcenter_datacenter: SDDC-Datacenter
 vcenter_validate_certs: false
-vm_folder: Workloads/sandbox-qzqxj
+vm_folder: Workloads/sandbox-qckg8
 vminfo_name: "{{ fresh_prov }}"
 
 # List of Hypervisors in the redhat demo (Open Env)
