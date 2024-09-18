@@ -17,6 +17,9 @@
 - name: Get a particular vm info 
   ansible.builtin.include_tasks:
     file: vm_info.yml
+  vars:
+    vminfo_name: "{{ item.fresh_prov }}"
+  loop: "{{ fresh_prov_list }}"
 
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
