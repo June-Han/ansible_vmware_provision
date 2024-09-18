@@ -27,7 +27,7 @@
   vars:
     clone_name: "{{ item.template_name }}"
     clone_parent: "{{ item.fresh_prov }}"
-  loop:
+  with_dict:
     "{{ fresh_prov_list | ansible.builtin.combine( template_prov_list, recursive=true) }}"
 
 - name: Provision VM based on X number of templates
