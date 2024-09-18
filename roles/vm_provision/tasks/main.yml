@@ -1,25 +1,25 @@
 ---
-- name: Remove VM from the vCenter inventory
-  ansible.builtin.include_tasks:
-    file: remove_vm.yml
-  vars:
-    vm_del_name: "{{ item }}"
-  loop: "{{ del_vm_list }}"
+# - name: Remove VM from the vCenter inventory
+#   ansible.builtin.include_tasks:
+#     file: remove_vm.yml
+#   vars:
+#     vm_del_name: "{{ item }}"
+#   loop: "{{ del_vm_list }}"
 
-- name: Provision a new vm from scratch
-  ansible.builtin.include_tasks:
-    file: fresh_provision.yml
-  vars:
-    fresh_prov: "{{ item.fresh_prov }}"
-    fresh_os: "{{ item.fresh_os }}"
-  loop: "{{ fresh_prov_list }}"
+# - name: Provision a new vm from scratch
+#   ansible.builtin.include_tasks:
+#     file: fresh_provision.yml
+#   vars:
+#     fresh_prov: "{{ item.fresh_prov }}"
+#     fresh_os: "{{ item.fresh_os }}"
+#   loop: "{{ fresh_prov_list }}"
 
-- name: Get a particular vm info 
-  ansible.builtin.include_tasks:
-    file: vm_info.yml
-  vars:
-    vminfo_name: "{{ item.fresh_prov }}"
-  loop: "{{ fresh_prov_list }}"
+# - name: Get a particular vm info 
+#   ansible.builtin.include_tasks:
+#     file: vm_info.yml
+#   vars:
+#     vminfo_name: "{{ item.fresh_prov }}"
+#   loop: "{{ fresh_prov_list }}"
 
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
@@ -27,9 +27,8 @@
   vars:
     clone_name: "{{ item.template_name }}"
     clone_parent: "{{ item.fresh_prov }}"
-  with_subelements:
-    - "{{ fresh_prov_list }}"
-    - "{{ template_prov_list }}"
+  loop:
+    "{{ fresh_prov_list | ansible.builtin.combine( template_prov _list), recursive=true }}"
 
 - name: Provision VM based on X number of templates
   ansible.builtin.include_tasks:
