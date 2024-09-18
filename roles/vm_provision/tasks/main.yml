@@ -23,10 +23,11 @@
 
 - name: Debug message from AAP
   ansible.builtin.debug:
-    msg: "{{ item[0].fresh_prov | default() }}"
+    msg: 
+      - "{{ item[0].fresh_prov | default() }}"
+      - "{{ item[0].template_name | default() }}"
   loop:
-    - "{{ fresh_prov_list }}"
-    - "{{ template_prov_list }}"
+    - "{{ fresh_prov_list | zip(template_prov_list) }}"
 
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
@@ -34,12 +35,8 @@
   vars:
     clone_name: "{{ item.template_name | default() }}"
     clone_parent: "{{ item.fresh_prov | default() }}"
-  ansible.builtin.debug:
-    msg: 
-      - "{{ clone_name }}"
-      - "{{ clone_parent }}"
   loop:
-    - "{{ fresh_prov_list }}"
+    - "{{ fresh_prov_list | }}"
     - "{{ template_prov_list }}"
     
 
