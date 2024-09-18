@@ -21,9 +21,12 @@
 #     vminfo_name: "{{ item.fresh_prov }}"
 #   loop: "{{ fresh_prov_list }}"
 
-# - name: Debug message from AAP
-#   ansible.builtin.debug:
-#     msg: "{{ clone_list }}"
+- name: Debug message from AAP
+  ansible.builtin.debug:
+    msg: "{{ item }}"
+  loop:
+    - "{{ fresh_prov_list }}"
+    - "{{ template_prov_list }}"
 
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
