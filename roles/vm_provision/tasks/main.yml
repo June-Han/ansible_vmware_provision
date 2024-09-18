@@ -24,29 +24,29 @@
 - name: Debug message from AAP
   ansible.builtin.debug:
     msg: 
-      - "{{ item[0][0].fresh_prov }}"
-      - "{{ item[0][1].template_name }}"
+      - "{{ item[0].fresh_prov }}"
+      - "{{ item[1].template_name }}"
   loop:
-    - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
+    - "{{ fresh_prov_list | zip(template_prov_list)}}"
 
-- name: Instant clone and convert VM to template
-  ansible.builtin.include_tasks:
-    file: clone_vm.yml
-  vars:
-    clone_name: "{{ item[0][1].template_name | default() }}"
-    clone_parent: "{{ item[0][0].fresh_prov | default() }}"
-  loop:
-    - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
+# - name: Instant clone and convert VM to template
+#   ansible.builtin.include_tasks:
+#     file: clone_vm.yml
+#   vars:
+#     clone_name: "{{ item[0][1].template_name | default() }}"
+#     clone_parent: "{{ item[0][0].fresh_prov | default() }}"
+#   loop:
+#     - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
     
 
-- name: Provision VM based on X number of templates
-  ansible.builtin.include_tasks:
-    file: template_provision.yml
-  vars:
-    template_prov: "{{ item.template_prov }}"
-    template_name: "{{ item.template_name }}"
-    iso_name: "{{ item.iso_name }}"
-  loop: "{{ template_prov_list }}"
+# - name: Provision VM based on X number of templates
+#   ansible.builtin.include_tasks:
+#     file: template_provision.yml
+#   vars:
+#     template_prov: "{{ item.template_prov }}"
+#     template_name: "{{ item.template_name }}"
+#     iso_name: "{{ item.iso_name }}"
+#   loop: "{{ template_prov_list }}"
 
 # - name: Provision VM base on OVA
 #   ansible.builtin.include_tasks:
