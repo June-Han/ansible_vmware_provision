@@ -24,3 +24,5 @@ cluster_name: Cluster-1
 network_vars:
     name: segment-sandbox-qckg8 #segment-sandbox-qzqxj
     mac: 00:50:56:8e:11:44 #00:50:56:8e:36:d5
+
+clone_list: "{{ fresh_prov_list | ansible.builtin.combine(template_prov_list, recursive=true) }}"
