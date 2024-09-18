@@ -26,7 +26,7 @@
     msg: 
      - "{{ item }}"
   loop:
-    - "{{ fresh_prov_list | zip(template_prov_list) | list | flatten(1)}}"
+    - "{{ fresh_prov_list | zip(template_prov_list) | list | flatten(2)}}"
 
 # - name: Instant clone and convert VM to template
 #   ansible.builtin.include_tasks:
