@@ -23,7 +23,7 @@
 
 - name: Debug message from AAP
   ansible.builtin.debug:
-    msg: "{{ item[0].fresh_prov | omit }}"
+    msg: "{{ item[0].fresh_prov | default() }}"
   loop:
     - "{{ fresh_prov_list }}"
     - "{{ template_prov_list }}"
@@ -32,8 +32,8 @@
   ansible.builtin.include_tasks:
     file: clone_vm.yml
   vars:
-    clone_name: "{{ item.template_name | omit }}"
-    clone_parent: "{{ item.fresh_prov | omit }}"
+    clone_name: "{{ item.template_name | default() }}"
+    clone_parent: "{{ item.fresh_prov | default() }}"
   loop:
     - "{{ fresh_prov_list }}"
     - "{{ template_prov_list }}"
