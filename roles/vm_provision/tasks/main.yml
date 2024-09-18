@@ -23,9 +23,7 @@
 
 - name: Debug message from AAP
   ansible.builtin.debug:
-    msg: 
-      - "{{ item[0].fresh_prov }}"
-      - "{{ item[1].template_name }}"
+    msg: "{{ item }}"
   loop:
     - "{{ fresh_prov_list | zip(template_prov_list)}}"
 
