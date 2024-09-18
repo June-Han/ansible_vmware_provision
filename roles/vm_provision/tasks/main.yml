@@ -23,9 +23,9 @@
 
 - name: Debug message from AAP
   ansible.builtin.debug:
-    msg: "{{ item[0] }}"
+    msg: "{{ item }}"
   loop:
-    - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
+    - "{{ fresh_prov_list | zip(template_prov_list) | list}}[0]"
 
 # - name: Instant clone and convert VM to template
 #   ansible.builtin.include_tasks:
