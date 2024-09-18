@@ -24,7 +24,7 @@
 - name: Debug message from AAP
   ansible.builtin.debug:
     msg: 
-     - "{{ item[0][0].fresh_prov }}"
+     - "{{ item[0].fresh_prov }}"
   with_items: #Use with_items to flatten the nested list
     - "{{ clone_list }}"
 
