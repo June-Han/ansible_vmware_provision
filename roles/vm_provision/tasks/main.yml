@@ -34,6 +34,10 @@
   vars:
     clone_name: "{{ item.template_name | default() }}"
     clone_parent: "{{ item.fresh_prov | default() }}"
+  ansible.builtin.debug:
+    msg: 
+      - "{{ clone_name }}"
+      - "{{ clone_parent }}"
   loop:
     - "{{ fresh_prov_list }}"
     - "{{ template_prov_list }}"
