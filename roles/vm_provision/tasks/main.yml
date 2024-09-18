@@ -28,7 +28,7 @@
     clone_name: "{{ item.template_name }}"
     clone_parent: "{{ item.fresh_prov }}"
   loop:
-    "{{ fresh_prov_list | ansible.builtin.combine( template_prov_list), recursive=true }}"
+    "{{ fresh_prov_list | ansible.builtin.combine( template_prov_list, recursive=true) }}"
 
 - name: Provision VM based on X number of templates
   ansible.builtin.include_tasks:
