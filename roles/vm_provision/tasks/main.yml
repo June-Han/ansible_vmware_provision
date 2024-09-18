@@ -26,7 +26,7 @@
     msg: 
      - "{{ item }}"
   loop:
-    - "{{ clone_list }}"
+    - "{{ clone_list | flatten(3) }}"
 
 # - name: Instant clone and convert VM to template
 #   ansible.builtin.include_tasks:
