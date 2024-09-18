@@ -23,7 +23,9 @@
 
 - name: Debug message from AAP
   ansible.builtin.debug:
-    msg: "{{ item[0][0] }}"
+    msg: 
+      - "{{ item[0][0].fresh_prov }}"
+      - "{{ item[0][1].template_name }}"
   loop:
     - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
 
@@ -31,11 +33,10 @@
   ansible.builtin.include_tasks:
     file: clone_vm.yml
   vars:
-    clone_name: "{{ item.template_name | default() }}"
-    clone_parent: "{{ item.fresh_prov | default() }}"
+    clone_name: "{{ item[0][1].template_name | default() }}"
+    clone_parent: "{{ item[0][0].fresh_prov | default() }}"
   loop:
-    - "{{ fresh_prov_list }}"
-    - "{{ template_prov_list }}"
+    - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
     
 
 - name: Provision VM based on X number of templates
