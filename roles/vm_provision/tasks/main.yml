@@ -27,7 +27,7 @@
       - "{{ item[0].fresh_prov | default() }}"
       - "{{ item[0].template_name | default() }}"
   loop:
-    - "{{ fresh_prov_list | zip(template_prov_list) }}"
+    - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
 
 - name: Instant clone and convert VM to template
   ansible.builtin.include_tasks:
