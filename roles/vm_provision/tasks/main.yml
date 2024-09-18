@@ -24,8 +24,8 @@
 - name: Debug message from AAP
   ansible.builtin.debug:
     msg: 
-     - "{{ item }}"
-  with_items:
+     - "{{ item[0][0].fresh_prov }}"
+  with_items: #Use with_items to flatten the nested list
     - "{{ clone_list }}"
 
 # - name: Instant clone and convert VM to template
@@ -34,7 +34,7 @@
 #   vars:
 #     clone_name: "{{ item[0][1].template_name | default() }}"
 #     clone_parent: "{{ item[0][0].fresh_prov | default() }}"
-#   loop:
+#   with_items:
 #     - "{{ fresh_prov_list | zip(template_prov_list) | list}}"
     
 
