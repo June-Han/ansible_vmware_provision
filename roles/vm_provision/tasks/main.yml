@@ -29,8 +29,8 @@
   ansible.builtin.include_tasks:
     file: clone_vm.yml
   vars:
-    clone_name: "{{ item.0.template_name }}"
-    clone_parent: "{{ item.1.fresh_prov }}"
+    clone_name: "{{ item.1.template_name }}"
+    clone_parent: "{{ item.0.fresh_prov }}"
   loop:
     - "{{ fresh_prov_list }}"
     - "{{ template_prov_list }}"
