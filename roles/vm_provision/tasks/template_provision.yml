@@ -1,4 +1,4 @@
-- name: Provision VM based on a template
+- name: Provision VM based on a template (need vm-tools to customize)
   community.vmware.vmware_guest:
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
@@ -8,25 +8,25 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     template: "{{ template_name }}"  #Template or existing VM used to create new virtual machine
-    disk:
-    - size_gb: 20
-      type: thin
-      autoselect_datastore: true 
+    # disk:
+    # - size_gb: 20
+    #   type: thin
+    #   autoselect_datastore: true 
     # hardware:
     #   memory_mb: 8192
     #   num_cpus: 4
     #   scsi: paravirtual
-      # mem_reservation: 4096
-      # cpu_shares_level: "high"
-      # mem_shares_level: "high"
-      # cpu_limit: 8096
-      # cpu_reservation: 4096
+    #   mem_reservation: 4096
+    #   cpu_shares_level: "high"
+    #   mem_shares_level: "high"
+    #   cpu_limit: 8096
+    #   cpu_reservation: 4096
     networks:
     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
       mac: "{{ network_vars['mac'] }}"
     # cdrom:
     # - controller_number: 0
-    #   # iso_path: "[{{ vcenter_datastore }}] /iso/{{ iso_name }}"
+    #   iso_path: "[{{ vcenter_datastore }}] /iso/{{ iso_name }}"
   register: deploy_vm
 
 - name: Print the VM info deployed from template
