@@ -7,9 +7,18 @@
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
-    state: poweredon
     # networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
+
+
+- name: set state to poweroff the Cloned VM
+  community.vmware.vmware_guest_powerstate:
+    validate_certs: false
+    hostname: "{{ vcenter_hostname }}"
+    name: ovaftestvm
+    folder: "{{ vm_folder }}"
+    state: powered-on
+  delegate_to: localhost
 
 # - name: Move Virtual Machine (if folder not found)
 #   community.vmware.vmware_guest_move:
