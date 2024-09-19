@@ -7,15 +7,16 @@
     datastore: "{{ datastore1 }}"
     name: ovaftestvm
     ovf: rhel86-tpl #roadshow-tpl-database
+    state: poweredon
     # networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
 
-- name: Move Virtual Machine (if folder not found)
-  community.vmware.vmware_guest_move:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    name: ovaftestvm
-    dest_folder: "{{ vm_folder }}"
+# - name: Move Virtual Machine (if folder not found)
+#   community.vmware.vmware_guest_move:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     name: ovaftestvm
+#     dest_folder: "{{ vm_folder }}"
 
 # - name: Deploy Virtual Machine from template in content library
 #   community.vmware.vmware_content_deploy_template:
