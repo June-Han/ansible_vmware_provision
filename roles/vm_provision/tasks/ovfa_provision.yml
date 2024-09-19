@@ -5,7 +5,7 @@
     cluster: "{{ cluster_name }}"
     folder: "{{ vm_folder }}"
     datastore: "{{ datastore1 }}"
-    name: ovaftestvm
+    name: ovaftestvm1
     ovf: rhel86-tpl #roadshow-tpl-database
     # networks: "{u'VM Network':u'{{ network_vars['name'] }}'}"
   register: ovaftestvm
@@ -15,7 +15,7 @@
   community.vmware.vmware_guest_powerstate:
     validate_certs: false
     hostname: "{{ vcenter_hostname }}"
-    name: ovaftestvm
+    name: ovaftestvm1
     folder: "{{ vm_folder }}"
     state: powered-on
   delegate_to: localhost
