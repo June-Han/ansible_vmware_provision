@@ -26,7 +26,6 @@
     #   mac: "{{ network_vars['mac'] }}"
     # cdrom:
     # - controller_number: 0
-    #   iso_path: "[{{ vcenter_datastore }}] /iso/{{ iso_name }}"
   register: deploy_vm
 
 - name: Print the VM info deployed from template
