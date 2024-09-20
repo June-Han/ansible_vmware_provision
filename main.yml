@@ -10,9 +10,14 @@
         # fresh_prov: testvm2 # Name of the VM (Deployment from scratch)
         # fresh_os: rhel8_64Guest # OS for the VM (Deployment from scratch)
 
+        # fresh_prov_list:
+        #   - { fresh_prov: testvm1, fresh_os: rhel8_64Guest }
+        #   - { fresh_prov: testvm2, fresh_os: windows9_64Guest }
+
         fresh_prov_list:
-          - { fresh_prov: testvm1, fresh_os: rhel8_64Guest }
-          - { fresh_prov: testvm2, fresh_os: windows9_64Guest }
+          - { fresh_prov: winServer2019, fresh_os: windows2019srv_64Guest }
+          - { fresh_prov: winServer2022, fresh_os: windows2019srvNext_64Guest }
+          - { fresh_prov: winServer2025, fresh_os: windows2022srvNext_64Guest }
 
         #template_prov: testvm3 # Name of the VM (Deployment from template)
         #template_name: rhel86-tpl # Name of template (Deployment from template)

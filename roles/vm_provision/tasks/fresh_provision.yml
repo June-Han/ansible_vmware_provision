@@ -27,6 +27,12 @@
     #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
   register: deploy_vm
 
+- name: install vmware tools via Chocolatey
+  win_chocolatey: 
+    name: vmware-tools 
+    state: latest
+  when: ansible_facts['os_family'] == "Windows"
+
 - name: Print the VM info deployed from scratch
   ansible.builtin.debug:
     var: deploy_vm

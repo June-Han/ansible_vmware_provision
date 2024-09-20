@@ -11,7 +11,7 @@
   register: ovaftestvm
 
 
-- name: set state to poweroff the Cloned VM
+- name: set state to poweron the Cloned VM
   community.vmware.vmware_guest_powerstate:
     validate_certs: false
     hostname: "{{ vcenter_hostname }}"
