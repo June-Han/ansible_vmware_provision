@@ -31,7 +31,13 @@
   win_chocolatey: 
     name: vmware-tools 
     state: latest
-  when: ansible_facts['os_family'] == "Windows"
+  when: ansible_os_family == "Windows"
+
+- name: install vmware tools via dnf
+  ansible.builtin.dnf:
+    name: vmware-tools
+    state: latest
+  when: ansible_os_family == "RedHat"
 
 - name: Print the VM info deployed from scratch
   ansible.builtin.debug:
