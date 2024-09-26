@@ -14,38 +14,38 @@
     fresh_os: "{{ item.fresh_os }}"
   loop: "{{ fresh_prov_list }}"
 
-# - name: Get a particular vm info 
-#   ansible.builtin.include_tasks:
-#     file: vm_info.yml
-#   vars:
-#     vminfo_name: "{{ item.fresh_prov }}"
-#   loop: "{{ fresh_prov_list }}"
+- name: Get a particular vm info 
+  ansible.builtin.include_tasks:
+    file: vm_info.yml
+  vars:
+    vminfo_name: "{{ item.fresh_prov }}"
+  loop: "{{ fresh_prov_list }}"
 
-# - name: Debug message from AAP
-#   ansible.builtin.debug:
-#     msg: 
-#      - "{{ item }}"
-#   with_items: #Use with_items to flatten the nested list
-#     - "{{ clone_list }}"
+- name: Debug message from AAP
+  ansible.builtin.debug:
+    msg: 
+     - "{{ item }}"
+  with_items: #Use with_items to flatten the nested list
+    - "{{ clone_list }}"
 
-# - name: Instant clone and convert VM to template
-#   ansible.builtin.include_tasks:
-#     file: clone_vm.yml
-#   vars:
-#     clone_name: "{{ item[1].template_name | default() }}"
-#     clone_parent: "{{ item[0].fresh_prov | default() }}"
-#   with_items:
-#     - "{{ clone_list }}"
+- name: Instant clone and convert VM to template
+  ansible.builtin.include_tasks:
+    file: clone_vm.yml
+  vars:
+    clone_name: "{{ item[1].template_name | default() }}"
+    clone_parent: "{{ item[0].fresh_prov | default() }}"
+  with_items:
+    - "{{ clone_list }}"
 
-# - name: Provision VM based on X number of templates
-#   ansible.builtin.include_tasks:
-#     file: template_provision.yml
-#   vars:
-#     template_prov: "{{ item.template_prov }}"
-#     template_name: "{{ item.template_name }}"
-#     iso_name: "{{ item.iso_name }}"
-#   loop: "{{ template_prov_list }}"
+- name: Provision VM based on X number of templates
+  ansible.builtin.include_tasks:
+    file: template_provision.yml
+  vars:
+    template_prov: "{{ item.template_prov }}"
+    template_name: "{{ item.template_name }}"
+    iso_name: "{{ item.iso_name }}"
+  loop: "{{ template_prov_list }}"
 
-# - name: Provision VM base on OVA
-#   ansible.builtin.include_tasks:
-#     file: ovfa_provision.yml
+- name: Provision VM base on OVA
+  ansible.builtin.include_tasks:
+    file: ovfa_provision.yml

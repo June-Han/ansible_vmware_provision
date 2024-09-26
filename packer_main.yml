@@ -1,0 +1,9 @@
+---
+- name: Provision a RHEL VM in VMware
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Include VM provisioning role
+      ansible.builtin.include_role:
+        name: image_packer
+

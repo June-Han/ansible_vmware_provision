@@ -1,0 +1,16 @@
+//Ran using the command:
+ansible-builder build -f execution_env.yml -v3 -t ee-vmware
+
+//The tag will be automatically labelled as latest. 
+//If the respository is going to be localhost, there will be connection and pinging issues to the repository
+//Hence the tag need to be changed during image building or retagged.
+ansible-builder build -f execution_env.yml -v3 -t ee-vmware
+podman tag IMAGE_ID NEW_TAG_NAME
+podman tag 0d120b6ccaae my-image:v2
+
+
+//pip version 22 only have ansible-core up to 2.15
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_HOST=vcsnsx-vc.infra.demo.redhat.com
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_USER=sandbox-qckg8@demo
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_PASSWORD=eu.iLk-6FLL6
+[junehan@fedora ansible_vmware_provision]$ ansible-navigator run main.yml --eei localhost/ee-vmware:v1.0.0 --mode stdout --penv VMWARE_HOST --penv VMWARE_USER --penv VMWARE_PASSWORD

@@ -1,0 +1,7 @@
+2024-09-23T06:24:32.108281+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' Image inspection failed, image assumed to be corrupted or missing
+2024-09-23T06:24:32.108514+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stdout: []
+
+2024-09-23T06:24:32.108570+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stderr: Error: localhost/ee-vmware:latest: image not known
+
+2024-09-23T06:24:52.493268+00:00 CRITICAL 'ansible_navigator.actions.run_playbook._handle_message' Unhandled message from runner queue, discarded: {'event': 'verbose', 'uuid': 'ef486114-ad5c-4e79-9292-b3a2075a3856', 'counter': 1, 'stdout': '\x1b[0;31mERROR! the playbook: main.yml could not be found\x1b[0m', 'start_line': 0, 'end_line': 1, 'runner_ident': 'f5a4f6f6-890b-4ddf-a928-47f09942e2f4', 'created': '2024-09-23T06:24:52.483604'}
+2024-09-23T06:24:52.801176+00:00 ERROR 'ansible_navigator.actions.run_playbook.write_artifact' Saving the artifact file failed, resulted in the following error: f[Errno 13] Permission denied: '/main-artifact-2024-09-23T06:24:52.798366+00:00.json'
