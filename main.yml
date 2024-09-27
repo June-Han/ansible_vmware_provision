@@ -28,6 +28,7 @@
 
         del_vm_list: 
           - winServer2019
+          - winServer2022
 
     - name: Debug message from AAP
       ansible.builtin.debug:

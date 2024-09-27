@@ -43,6 +43,36 @@
 #     state: latest
 #   when: ansible_os_family == "RedHat"
 
+- name: Change virtual machine's boot order and related parameters
+  community.vmware.vmware_guest_boot_manager:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    name: "{{ fresh_prov }}"
+    boot_delay: 2000
+    enter_bios_setup: true
+    boot_retry_enabled: true
+    boot_retry_delay: 22300
+    boot_firmware: bios
+    secure_boot_enabled: false
+    boot_order:
+      - floppy
+      - cdrom
+      - ethernet
+      - disk
+  delegate_to: localhost
+  register: vm_boot_order
+
+# - name: Run command inside a virtual machine
+#   community.vmware.vmware_vm_shell:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vm_folder }}"
+#     vm_id: "{{ fresh_prov }}"
+
+
+
+
 - name: Print the VM info deployed from scratch
   ansible.builtin.debug:
     var: deploy_vm
