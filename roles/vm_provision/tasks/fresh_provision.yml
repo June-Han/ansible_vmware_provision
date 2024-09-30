@@ -9,7 +9,12 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     customization:
+      autologon: true
       password: "password"
+      runonce:
+      - cmd.exe /c e:\setup64 /s /v "/qb REBOOT=R"
+      - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
+      - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
     disk:
     - size_gb: 2
       type: thin
@@ -33,10 +38,6 @@
       device_type: vmxnet3 #vmxnet3 by default
     #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
     #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
-    runonce:
-    - cmd.exe /c e:\setup64 /s /v "/qb REBOOT=R"
-    - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
-    - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
   register: deploy_vm
 
 # - name: install vmware tools via Chocolatey
