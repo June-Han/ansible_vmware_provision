@@ -22,6 +22,8 @@
     cdrom:
       - controller_number: 0
         unit_number: 0
+        type: iso
+        iso_path: "{{ iso_location }}"
         state: present
     networks:
     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
