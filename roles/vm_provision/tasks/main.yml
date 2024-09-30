@@ -12,7 +12,7 @@
   vars:
     fresh_prov: "{{ item.fresh_prov }}"
     fresh_os: "{{ item.fresh_os }}"
-    iso_location: "{{ iso_location }}"
+    iso_location: "[workload_share_dwPsq] rhel8/rhel-8.9-x86_64-dvd.iso"
   loop: "{{ fresh_prov_list }}"
 
 # - name: Get a particular vm info 
