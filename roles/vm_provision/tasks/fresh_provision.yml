@@ -9,7 +9,7 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     customization:
-      password: "eu.iLk-6FLL6"
+      password: "password"
     disk:
     - size_gb: 2
       type: thin
@@ -70,9 +70,9 @@
     folder: "{{ vm_folder }}"
     vm_id: "{{ fresh_prov }}"
     vm_username: "Administrator"
-    vm_password: "eu.iLk-6FLL6"
+    vm_password: "password"
     directory:
-      path: "/test"
+      path: "C:\\test"
       operation: create
       recurse: false
   delegate_to: localhost
@@ -84,16 +84,16 @@
     folder: "{{ vm_folder }}"
     vm_id: "{{ fresh_prov }}"
     vm_username: "Administrator"
-    vm_password: "eu.iLk-6FLL6"
+    vm_password: "password"
     copy:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
       overwrite: false
     loop:
       - src: files/windows-init.ps1
-        dest: /test/windows-init.ps1
+        dest: C:\\test\\windows-init.ps1
       - src: files/windows-vmtools.ps1
-        dest: /test/windows-vmtools.ps1
+        dest: C:\\test\\windows-vmtools.ps1
   delegate_to: localhost
 
 - name: Run command inside a virtual machine
@@ -103,7 +103,7 @@
     folder: "{{ vm_folder }}"
     vm_id: "{{ fresh_prov }}"
     vm_username: "Administrator"
-    vm_password: "eu.iLk-6FLL6"
+    vm_password: "password"
     vm_shell: "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe"
     vm_shell_args: "-ExecutionPolicy Unrestricted -File C:\\test\\windows-vmtools.ps1"
   delegate_to: localhost
