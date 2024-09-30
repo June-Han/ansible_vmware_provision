@@ -9,7 +9,6 @@
     #esxi_hostname: #Set either esxi or cluster
     cluster: "{{ cluster_name }}"
     customization:
-      autologon: true
       password: "password"
       runonce:
       - cmd.exe /c e:\setup64 /s /v "/qb REBOOT=R"
