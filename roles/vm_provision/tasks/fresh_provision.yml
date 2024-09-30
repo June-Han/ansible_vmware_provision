@@ -83,36 +83,36 @@
       recurse: false
   delegate_to: localhost
 
-- name: copy file to vm
-  community.vmware.vmware_guest_file_operation:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
-    vm_id: "{{ fresh_prov }}"
-    vm_username: "Administrator"
-    vm_password: "password"
-    copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      overwrite: false
-    loop:
-      - src: files/windows-init.ps1
-        dest: C:\\test\\windows-init.ps1
-      - src: files/windows-vmtools.ps1
-        dest: C:\\test\\windows-vmtools.ps1
-  delegate_to: localhost
+# - name: copy file to vm
+#   community.vmware.vmware_guest_file_operation:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vm_folder }}"
+#     vm_id: "{{ fresh_prov }}"
+#     vm_username: "Administrator"
+#     vm_password: "password"
+#     copy:
+#       src: "{{ item.src }}"
+#       dest: "{{ item.dest }}"
+#       overwrite: false
+#     loop:
+#       - src: files/windows-init.ps1
+#         dest: C:\\test\\windows-init.ps1
+#       - src: files/windows-vmtools.ps1
+#         dest: C:\\test\\windows-vmtools.ps1
+#   delegate_to: localhost
 
-- name: Run command inside a virtual machine
-  community.vmware.vmware_vm_shell:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
-    vm_id: "{{ fresh_prov }}"
-    vm_username: "Administrator"
-    vm_password: "password"
-    vm_shell: "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe"
-    vm_shell_args: "-ExecutionPolicy Unrestricted -File C:\\test\\windows-vmtools.ps1"
-  delegate_to: localhost
+# - name: Run command inside a virtual machine
+#   community.vmware.vmware_vm_shell:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vm_folder }}"
+#     vm_id: "{{ fresh_prov }}"
+#     vm_username: "Administrator"
+#     vm_password: "password"
+#     vm_shell: "C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe"
+#     vm_shell_args: "-ExecutionPolicy Unrestricted -File C:\\test\\windows-vmtools.ps1"
+#   delegate_to: localhost
 
 - name: Print the VM info deployed from scratch
   ansible.builtin.debug:
