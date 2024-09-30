@@ -1,10 +1,10 @@
 ---
-- name: Remove VM from the vCenter inventory
-  ansible.builtin.include_tasks:
-    file: remove_vm.yml
-  vars:
-    vm_del_name: "{{ item }}"
-  loop: "{{ del_vm_list }}"
+# - name: Remove VM from the vCenter inventory
+#   ansible.builtin.include_tasks:
+#     file: remove_vm.yml
+#   vars:
+#     vm_del_name: "{{ item }}"
+#   loop: "{{ del_vm_list }}"
 
 - name: Provision a new vm from scratch
   ansible.builtin.include_tasks:
@@ -12,7 +12,7 @@
   vars:
     fresh_prov: "{{ item.fresh_prov }}"
     fresh_os: "{{ item.fresh_os }}"
-    iso_location: "[workload_share_dwPsq] rhel8/rhel-8.9-x86_64-dvd.iso"
+    iso_loc: "{{ item.iso_loc }}"
   loop: "{{ fresh_prov_list }}"
 
 # - name: Get a particular vm info 
