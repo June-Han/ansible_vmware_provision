@@ -20,6 +20,7 @@
       autoselect_datastore: true # To select the data store that is the least utilized
       # datastore: # To manually select datastore available (written in the vars of this role)
     hardware:
+      boot_firmware: bios
       memory_mb: 4096
       num_cpus: 4
       scsi: paravirtual

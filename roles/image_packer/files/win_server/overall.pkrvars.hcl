@@ -4,7 +4,7 @@
 vm_guest_os_type = "windows2019srv_64Guest"
 
 // Virtual Machine Hardware Settings
-vm_firmware              = "efi-secure"
+vm_firmware              = "bios"
 
 //Setting up winrm and vmtools
 script_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1"]

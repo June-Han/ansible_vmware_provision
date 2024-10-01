@@ -206,7 +206,7 @@ variable "vm_network_card" {
 variable "mac_address" {
   type        = string
   description = "The VM mac address."
-  default     = "00:50:56:83:3A:5D"
+  default     = "00:50:56:83:3a:5d"
 }
 
 variable "common_vm_version" {
@@ -340,7 +340,7 @@ variable "vm_shutdown_command" {
 variable "common_ip_wait_timeout" {
   type        = string
   description = "Time to wait for guest operating system IP address response."
-  default     = "30s"
+  default     = "30m"
 }
 
 variable "common_ip_settle_timeout" {
