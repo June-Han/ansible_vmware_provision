@@ -29,7 +29,9 @@ source "vsphere-iso" "win-server-2019-standard-core" {
     network_adapters {
         network      = var.vsphere_network
         network_card = var.vm_network_card
+        mac_address  = var.mac_address
     }
+    iso_paths = [local.iso_paths.datastore, local.iso_paths.tools]
     vm_version           = var.common_vm_version
     remove_cdrom         = var.common_remove_cdrom
     reattach_cdroms      = var.vm_cdrom_count
@@ -65,4 +67,11 @@ source "vsphere-iso" "win-server-2019-standard-core" {
     winrm_password = var.build_password
     winrm_port     = var.communicator_port
     winrm_timeout  = var.communicator_timeout
+}
+
+locals {
+    iso_paths = {
+        datastore       = "[workload_share_dwPsq] WindowsServer2022.iso"
+        tools           = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso"
+    }
 }

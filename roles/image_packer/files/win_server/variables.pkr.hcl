@@ -203,6 +203,12 @@ variable "vm_network_card" {
   default     = "vmxnet3"
 }
 
+variable "mac_address" {
+  type        = string
+  description = "The VM mac address."
+  default     = "00:50:56:83:3A:5D"
+}
+
 variable "common_vm_version" {
   type        = number
   description = "The vSphere virtual hardware version."
