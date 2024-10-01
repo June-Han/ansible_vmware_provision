@@ -11,9 +11,9 @@
     customization:
       password: "password"
       runonce:
+      - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
       - cmd.exe /c e:\setup64 /s /v "/qb REBOOT=R"
       - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
-      - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
     disk:
     - size_gb: 2
       type: thin
