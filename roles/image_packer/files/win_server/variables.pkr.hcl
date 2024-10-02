@@ -325,11 +325,11 @@ variable "vm_boot_wait" {
   default     = "2s"
 }
 
-//variable "vm_boot_command" {
-//  type        = list(string)
-//  description = "The virtual machine boot command."
-//  default     = ["<spacebar>"]
-//}
+variable "vm_boot_command" {
+  type        = list(string)
+  description = "The virtual machine boot command."
+  default     = ["<spacebar>"]
+}
 
 variable "vm_shutdown_command" {
   type        = string
@@ -340,7 +340,7 @@ variable "vm_shutdown_command" {
 variable "common_ip_wait_timeout" {
   type        = string
   description = "Time to wait for guest operating system IP address response."
-  default     = "30m"
+  default     = "60m"
 }
 
 variable "common_ip_settle_timeout" {
@@ -396,7 +396,7 @@ variable "communicator_port" {
 variable "communicator_timeout" {
   type        = string
   description = "The timeout for the communicator protocol."
-  default     = "12h"
+  default     = "30m"
 }
 
 // Provisioner Settings

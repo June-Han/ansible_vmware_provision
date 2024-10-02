@@ -29,10 +29,11 @@
           - { template_prov: testvm4, template_name: testvm2_rhel8, iso_name: rhel-8.9-x86_64-dvd.iso}
 
         del_vm_list: 
-          - rhel8VM_iso
-          - winServer2019
+          - WindowsServer2019Packer
+          # - rhel8VM_iso
+          # - winServer2019
           - winServer2022
-          - winServer2025
+          # - winServer2025
 
     - name: Debug message from AAP
       ansible.builtin.debug:

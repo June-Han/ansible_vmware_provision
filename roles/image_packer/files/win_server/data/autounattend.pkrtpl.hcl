@@ -21,66 +21,53 @@
       <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
          <DiskConfiguration>
             <Disk wcm:action="add">
-               <DiskID>0</DiskID>
-               <WillWipeDisk>true</WillWipeDisk>
-               <CreatePartitions>
-                  <!-- Windows RE Tools partition -->
-                  <CreatePartition wcm:action="add">
-                     <Order>1</Order>
-                     <Type>Primary</Type>
-                     <Size>550</Size>
-                  </CreatePartition>
-                  <!-- System partition (ESP) -->
-                  <CreatePartition wcm:action="add">
-                     <Order>2</Order>
-                     <Type>EFI</Type>
-                     <Size>100</Size>
-                  </CreatePartition>
-                  <!-- Microsoft reserved partition (MSR) -->
-                  <CreatePartition wcm:action="add">
-                     <Order>3</Order>
-                     <Type>MSR</Type>
-                     <Size>128</Size>
-                  </CreatePartition>
-                  <!-- Windows partition -->
-                  <CreatePartition wcm:action="add">
-                     <Order>4</Order>
-                     <Type>Primary</Type>
-                     <Extend>true</Extend>
-                  </CreatePartition>
-               </CreatePartitions>
-               <ModifyPartitions>
-                  <!-- Windows RE Tools partition -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>1</Order>
-                     <PartitionID>1</PartitionID>
-                     <Label>WINRE</Label>
-                     <Format>NTFS</Format>
-                     <TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>
-                  </ModifyPartition>
-                  <!-- System partition (ESP) -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>2</Order>
-                     <PartitionID>2</PartitionID>
-                     <Label>System</Label>
-                     <Format>FAT32</Format>
-                  </ModifyPartition>
-                  <!-- MSR partition does not need to be modified -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>3</Order>
-                     <PartitionID>3</PartitionID>
-                  </ModifyPartition>
-                  <!-- Windows partition -->
-                  <ModifyPartition wcm:action="add">
-                     <Order>4</Order>
-                     <PartitionID>4</PartitionID>
-                     <Label>OS</Label>
-                     <Letter>C</Letter>
-                     <Format>NTFS</Format>
-                  </ModifyPartition>
-               </ModifyPartitions>
+                <CreatePartitions>
+                    <CreatePartition wcm:action="add">
+                        <Type>Primary</Type>
+                        <Size>512</Size>
+                        <Order>1</Order>
+                    </CreatePartition>
+                    <CreatePartition wcm:action="add">
+                        <Extend>false</Extend>
+                        <Type>Primary</Type>
+                        <Size>1024</Size>
+                        <Order>2</Order>
+                    </CreatePartition>
+                    <CreatePartition wcm:action="add">
+                        <Extend>true</Extend>
+                        <Type>Primary</Type>
+                        <Order>3</Order>
+                    </CreatePartition>
+                </CreatePartitions>
+                <ModifyPartitions>
+                    <ModifyPartition wcm:action="add">
+                        <Active>true</Active>
+                        <Format>NTFS</Format>
+                        <Label>System</Label>
+                        <Extend>false</Extend>
+                        <Order>1</Order>
+                        <PartitionID>1</PartitionID>
+                    </ModifyPartition>
+                    <ModifyPartition wcm:action="add">
+                        <Format>NTFS</Format>
+                        <TypeID>0x27</TypeID>
+                        <Label>Recovery</Label>
+                        <Order>2</Order>
+                        <PartitionID>2</PartitionID>
+                    </ModifyPartition>
+                    <ModifyPartition wcm:action="add">
+                        <Format>NTFS</Format>
+                        <Letter>C</Letter>
+                        <Order>3</Order>
+                        <PartitionID>3</PartitionID>
+                        <Label>Windows</Label>
+                    </ModifyPartition>
+                </ModifyPartitions>
+                <DiskID>0</DiskID>
+                <WillWipeDisk>true</WillWipeDisk>
             </Disk>
-         </DiskConfiguration>
+            <WillShowUI>OnError</WillShowUI>
+        </DiskConfiguration>
          <ImageInstall>
             <OSImage>
                <InstallFrom>
@@ -91,8 +78,10 @@
                </InstallFrom>
                <InstallTo>
                   <DiskID>0</DiskID>
-                  <PartitionID>4</PartitionID>
+                  <PartitionID>3</PartitionID>
                </InstallTo>
+               <InstallToAvailablePartition>false</InstallToAvailablePartition>
+               <WillShowUI>OnError</WillShowUI>
             </OSImage>
          </ImageInstall>
          <UserData>
@@ -137,6 +126,7 @@
                <PlainText>true</PlainText>
             </Password>
             <Enabled>true</Enabled>
+            <LogonCount>2</LogonCount>
             <Username>${build_username}</Username>
          </AutoLogon>
          <OOBE>
@@ -168,13 +158,13 @@
          </UserAccounts>
          <FirstLogonCommands>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+               <CommandLine>cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
                <Description>Set Execution Policy 64-Bit</Description>
                <Order>1</Order>
                <RequiresUserInput>true</RequiresUserInput>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+               <CommandLine>%SystemRoot%\SysWOW64\cmd.exe /c %SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
                <Description>Set Execution Policy 32-Bit</Description>
                <Order>2</Order>
                <RequiresUserInput>true</RequiresUserInput>
@@ -187,7 +177,22 @@
             <SynchronousCommand wcm:action="add">
                <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\windows-init.ps1</CommandLine>
                <Order>4</Order>
-               <Description>Initial Configuration</Description>
+               <Description>Initial Configuration winrm</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\dhcp-ip.ps1</CommandLine>
+               <Order>4</Order>
+               <Description>Initial Configuration dhcp ip address</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v HideFileExt /t REG_DWORD /d 0 /f</CommandLine>
+               <Order>4</Order>
+               <Description>Show file extensions in Explorer</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE</CommandLine>
+               <Order>10</Order>
+               <Description>Disable password expiration for Administrator user</Description>
             </SynchronousCommand>
          </FirstLogonCommands>
       </component>

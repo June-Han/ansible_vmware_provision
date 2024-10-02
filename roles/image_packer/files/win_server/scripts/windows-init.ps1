@@ -25,7 +25,9 @@ winrm set winrm/config/service/auth '@{Basic="true"}'
 
 # Allow Windows Remote Management in the Windows Firewall.
 Write-Output 'Allowing Windows Remote Management in the Windows Firewall...'
-netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
+netsh firewall set service type=remoteadmin mode=enable
+netsh advfirewall firewall set rule group="Remote Administration" new enable=yes
+#netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
 netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=allow
 
 # Reset the autologon count.

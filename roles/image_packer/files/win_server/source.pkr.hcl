@@ -48,14 +48,19 @@ source "vsphere-iso" "win-server-2019-standard-core" {
         vm_inst_os_image     = var.vm_inst_os_image_standard_core
         vm_guest_os_language = var.vm_guest_os_language
         vm_guest_os_keyboard = var.vm_guest_os_keyboard
-        vm_guest_os_timezone = var.vm_guest_os_timezone
+        vm_guest_os_timezone = var.vm_guest_os_timezone    
     })
+    "windows-vmtools.ps1" = "${abspath(path.root)}/scripts/windows-vmtools.ps1"
+    "windows-init.ps1" = "${abspath(path.root)}/scripts/windows-init.ps1"
+    "dhcp-ip.ps1" = "${abspath(path.root)}/scripts/dhcp-ip.ps1"
     }
+
+    //floppy_files = ["./scripts/windows-vmtools.ps1", "./scripts/windows-init.ps1"]
 
     // Boot and Provisioning Settings
     boot_order        = var.vm_boot_order
     boot_wait         = var.vm_boot_wait
-    //boot_command      = var.vm_boot_command
+    boot_command      = var.vm_boot_command
     ip_wait_timeout   = var.common_ip_wait_timeout
     ip_settle_timeout = var.common_ip_settle_timeout
     shutdown_command  = var.vm_shutdown_command
@@ -71,7 +76,7 @@ source "vsphere-iso" "win-server-2019-standard-core" {
 
 locals {
     iso_paths = {
-        datastore       = "[workload_share_dwPsq] WindowsServer2022.iso"
+        datastore       = "[workload_share_dwPsq] WindowsServer2019.iso"
         tools           = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso"
     }
 }
