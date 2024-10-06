@@ -99,28 +99,37 @@
     state: file
   ignore_errors: true
 
-# - name: Fetch a file from the datastore
-#   ansible.builtin.uri:
-#     url: "https://{{ vcenter_hostname }}/"
+- name: Fetch a file from the datastore
+  ansible.builtin.uri:
+    url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}"
+    validate_certs: no
+    method: "get"
+    dest: ./server.vmx
 
-# - name: Adding VMX Entry - floppy0.fileType
-#   lineinfile:
-#     path: '/vmfs/volumes/{{ vm_info.instance.hw_files[0] }}'
-#     line: 'floppy0.fileType = "file"'
-#   delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+- name: Adding VMX Entry - floppy0.fileType
+  lineinfile:
+    path: './server.vmx'
+    line: 'floppy0.fileType = "file"'
 
-# - name: Adding VMX Entry - floppy0.fileName
-#   lineinfile:
-#     path: '/vmfs/volumes/{{ vm_info.instance.hw_files[0] }}'
-#     line: 'floppy0.fileName = "/vmfs/volumes/{{ vm_info.instance.hw_datastores[0] }}/floppy.img'
-#   delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+- name: Adding VMX Entry - floppy0.fileName
+  lineinfile:
+    path: './server.vmx'
+    line: 'floppy0.fileName = "/vmfs/volumes/{{ vm_info.instance.hw_datastores[0] }}/floppy.img'
 
-# - name: Removing VMX Entry - floppy0.present = "FALSE"
-#   lineinfile:
-#     path: '/vmfs/volumes/{{ vm_info.instance.hw_datastores[0] }}/floppy.img'
-#     line: 'floppy0.present = "FALSE"'
-#     state: absent
-#   delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+- name: Removing VMX Entry - floppy0.present = "FALSE"
+  lineinfile:
+    path: './server.vmx'
+    line: 'floppy0.present = "FALSE"'
+    state: absent
+
+- name: Replace the file in the datastore
+  community.vmware.vsphere_copy:
+    hostname: '{{ vcenter_hostname }}'
+    src: ./server.vmx
+    datacenter: '{{ vcenter_datacenter }}'
+    datastore: "{{ vm_info.instance.hw_datastores[1] }}"
+    path: '{{ vm_info.instance.hw_files[0].split()[1] }}'
+
 
 # - name: Create a directory inside the vm
 #   community.vmware.vmware_guest_file_operation:
