@@ -1,21 +1,9 @@
 ---
-# Installation packer
-- name: Installing dnf-utils for packer (RHEL)
-  ansible.builtin.dnf:
-    name: dnf-utils
-    state: present
+# Configuring Packer and running the image
+- name: Remove VM from the vCenter inventory
+  ansible.builtin.include_tasks:
+    file: packer_install.yml
 
-- name: Add in hashicorp repository (RHEL)
-  ansible.builtin.yum_respository:
-    name: hashicorp
-    baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-
-- name: Enabling hashicorp repository (RHEL)
-  community.general.dnf_config_manager:
-    name: hashicorp
-    state: enabled
-
-- name: Installing packer from the new repo (RHEL)
-  ansible.builtin.dnf:
-    name: packer
-    state: present
+- name: Build the VM in the vCenter
+  ansible.buildin.include_tasks:
+    file: build_vm.yml

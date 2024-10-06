@@ -15,9 +15,9 @@ vmtools_datastore = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-wi
 script_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1"]
 config_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1", "scripts/dhcp-ip.ps1", "scripts/winrm-httpv1.ps1", "scripts/winrm-httpsv1.ps1", "scripts/winrm-httpsv2.ps1"]
 
-vsphere_username        = "sandbox-qckg8@demo"
+//vsphere_username        = "sandbox-qckg8@demo"
 vsphere_datastore       = "workload_share_dwPsq"
-vsphere_password        = "eu.iLk-6FLL6"
+//vsphere_password        = "eu.iLk-6FLL6"
 vsphere_datacenter      = "SDDC-Datacenter"
 vsphere_cluster         = "Cluster-1"
 vsphere_network         = "segment-sandbox-qckg8"

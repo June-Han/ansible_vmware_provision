@@ -1,0 +1,5 @@
+- name: Initiate packer
+  ansible.builtin.command: packer init /files/win_server/
+
+- name: Build packer image in vCenter
+  ansible.builtin.command: packer build /files/win_server/
