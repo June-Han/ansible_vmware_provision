@@ -61,6 +61,23 @@
 #     state: latest
 #   when: ansible_os_family == "RedHat"
 
+- name: Change virtual machine's boot order and related parameters
+  community.vmware.vmware_guest_boot_manager:
+    hostname: "{{ vcenter_hostname }}"
+    name: "{{ fresh_prov }}"
+    boot_delay: 2000
+    enter_bios_setup: true
+    boot_retry_enabled: true
+    boot_retry_delay: 22300
+    boot_firmware: bios
+    secure_boot_enabled: false
+    boot_order:
+      - cdrom
+      - ethernet
+      - disk
+      - floppy
+  delegate_to: localhost
+  register: vm_boot_order
 
 - name: Get a particular vm info 
   ansible.builtin.include_tasks:
@@ -91,24 +108,6 @@
 #     line: 'floppy0.present = "FALSE"'
 #     state: absent
 #   delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
-
-- name: Change virtual machine's boot order and related parameters
-  community.vmware.vmware_guest_boot_manager:
-    hostname: "{{ vcenter_hostname }}"
-    name: "{{ fresh_prov }}"
-    boot_delay: 2000
-    enter_bios_setup: true
-    boot_retry_enabled: true
-    boot_retry_delay: 22300
-    boot_firmware: bios
-    secure_boot_enabled: false
-    boot_order:
-      - cdrom
-      - ethernet
-      - disk
-      - floppy
-  delegate_to: localhost
-  register: vm_boot_order
 
 # - name: Create a directory inside the vm
 #   community.vmware.vmware_guest_file_operation:
