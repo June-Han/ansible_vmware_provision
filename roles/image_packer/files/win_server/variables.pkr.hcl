@@ -412,11 +412,11 @@ variable "config_files" {
 }
 
 variable "iso_datastore" {
-  type = list(string)
+  type = string
   description = "Datastore on the vSphere with ISO to mount"
 }
 
 variable "vmtools_datastore" {
-  type = list(string)
+  type = string
   description = "Datastore on the vSphere with vmtools iso to mount"
 }

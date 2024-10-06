@@ -31,7 +31,8 @@ source "vsphere-iso" "win-server-2019-standard-core" {
         network_card = var.vm_network_card
         mac_address  = var.mac_address
     }
-    iso_paths = [local.iso_paths.datastore, local.iso_paths.tools]
+    //iso_paths = [local.iso_paths.datastore, local.iso_paths.tools]
+    iso_paths = [var.iso_datastore, var.vmtools_datastore]
     vm_version           = var.common_vm_version
     remove_cdrom         = var.common_remove_cdrom
     reattach_cdroms      = var.vm_cdrom_count
