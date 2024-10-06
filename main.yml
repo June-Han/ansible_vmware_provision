@@ -31,8 +31,8 @@
         del_vm_list: 
           - WindowsServer2019Packer
           # - rhel8VM_iso
-          # - winServer2019
-          - winServer2022
+          - winServer2019
+          # - winServer2022
           # - winServer2025
 
     - name: Debug message from AAP
