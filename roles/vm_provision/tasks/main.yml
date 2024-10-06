@@ -13,6 +13,7 @@
     fresh_prov: "{{ item.fresh_prov }}"
     fresh_os: "{{ item.fresh_os }}"
     iso_loc: "{{ item.iso_loc }}"
+    vmtool_iso_loc: "{{ item.vmtool_iso_loc }}"
   loop: "{{ fresh_prov_list }}"
 
 # - name: Get a particular vm info 
