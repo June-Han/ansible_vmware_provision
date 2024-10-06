@@ -30,6 +30,17 @@
         type: iso
         iso_path: "{{ iso_loc }}"
         state: present
+      
+      - controller_number: 0
+        unit_number: 1
+        type: iso
+        iso_path: "{{ vmtool_iso_loc }}"
+        state: present
+      
+      - controller_number: 0
+        unit_number: 2
+        iso_path: "[workload_share_dwPsq] autounattend.xml"
+
     networks:
     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
       mac: "{{ network_vars['mac']}}"
@@ -63,26 +74,26 @@
     boot_firmware: bios
     secure_boot_enabled: false
     boot_order:
-      - floppy
       - cdrom
       - ethernet
       - disk
+      - floppy
   delegate_to: localhost
   register: vm_boot_order
 
-- name: Create a directory inside the vm
-  community.vmware.vmware_guest_file_operation:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
-    vm_id: "{{ fresh_prov }}"
-    vm_username: "Administrator"
-    vm_password: "password"
-    directory:
-      path: "C:\\test"
-      operation: create
-      recurse: false
-  delegate_to: localhost
+# - name: Create a directory inside the vm
+#   community.vmware.vmware_guest_file_operation:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vm_folder }}"
+#     vm_id: "{{ fresh_prov }}"
+#     vm_username: "Administrator"
+#     vm_password: "password"
+#     directory:
+#       path: "C:\\test"
+#       operation: create
+#       recurse: false
+#   delegate_to: localhost
 
 # - name: copy file to vm
 #   community.vmware.vmware_guest_file_operation:

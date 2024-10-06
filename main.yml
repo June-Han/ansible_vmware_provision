@@ -15,7 +15,7 @@
         #   - { fresh_prov: testvm2, fresh_os: windows9_64Guest }
         fresh_prov_list:
           # - { fresh_prov: rhel8VM_iso, fresh_os: rhel8_64Guest, iso_loc: "[workload_share_dwPsq] rhel8/rhel-8.9-x86_64-dvd.iso" }
-          - { fresh_prov: winServer2022, fresh_os: windows2019srvNext_64Guest, iso_loc: "[workload_share_dwPsq] WindowsServer2022.iso" }
+          - { fresh_prov: winServer2019, fresh_os: windows2019srv_64Guest, iso_loc: "[workload_share_dwPsq] WindowsServer2019.iso", vmtool_iso_loc: "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso" }
         # fresh_prov_list:
           # - { fresh_prov: winServer2019, fresh_os: windows2019srv_64Guest }
           # - { fresh_prov: winServer2022, fresh_os: windows2019srvNext_64Guest, iso_loc: "[workload_share_dwPsq] WindowsServer2022.iso" }
