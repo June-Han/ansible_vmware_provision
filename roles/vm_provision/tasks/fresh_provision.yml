@@ -61,6 +61,37 @@
 #     state: latest
 #   when: ansible_os_family == "RedHat"
 
+
+- name: Get a particular vm info 
+  ansible.builtin.include_tasks:
+    file: vm_info.yml
+  vars:
+    vminfo_name: "{{ fresh_prov }}"
+  register: vm_info
+
+- name: Print the particular VM info
+  ansible.builtin.debug:
+    var: vm_info
+
+- name: Adding VMX Entry - floppy0.fileType
+  lineinfile:
+    path: '/vmfs/volumes/{{ vm_info.instance.hw_files[0] }}'
+    line: 'floppy0.fileType = "file"'
+  delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+
+- name: Adding VMX Entry - floppy0.fileName
+  lineinfile:
+    path: '/vmfs/volumes/{{ vm_info.instance.hw_files[0] }}'
+    line: 'floppy0.fileName = "/vmfs/volumes/{{ vm_info.instance.hw_datastores[0] }}/floppy.img'
+  delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+
+# - name: Removing VMX Entry - floppy0.present = "FALSE"
+#   lineinfile:
+#     path: '/vmfs/volumes/{{ esxi_datastore }}/{{ vm_name }}/{{ vm_name }}.vmx'
+#     line: 'floppy0.present = "FALSE"'
+#     state: absent
+#   delegate_to: '{{ vm_info.instance.hw_esxi_host }}'
+
 - name: Change virtual machine's boot order and related parameters
   community.vmware.vmware_guest_boot_manager:
     hostname: "{{ vcenter_hostname }}"
@@ -78,12 +109,6 @@
       - floppy
   delegate_to: localhost
   register: vm_boot_order
-
-- name: Get a particular vm info 
-  ansible.builtin.include_tasks:
-    file: vm_info.yml
-  vars:
-    vminfo_name: "{{ fresh_prov }}"
 
 # - name: Create a directory inside the vm
 #   community.vmware.vmware_guest_file_operation:
