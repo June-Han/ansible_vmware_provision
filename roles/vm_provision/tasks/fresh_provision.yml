@@ -26,20 +26,25 @@
       scsi: paravirtual
     cdrom:
       - controller_number: 0
+        controller_type: "sata"
         unit_number: 0
         type: iso
         iso_path: "{{ iso_loc }}"
         state: present
       
       - controller_number: 0
+        controller_type: "sata"
         unit_number: 1
         type: iso
         iso_path: "{{ vmtool_iso_loc }}"
         state: present
       
       - controller_number: 0
+        controller_type: "sata"
         unit_number: 2
         iso_path: "[workload_share_dwPsq] autounattend.xml"
+        type: iso
+        state: present
 
     networks:
     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
