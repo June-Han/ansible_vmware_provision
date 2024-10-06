@@ -101,7 +101,8 @@
 
 - name: Fetch a file from the datastore
   ansible.builtin.uri:
-    url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}&enc=std"
+    # url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}"
+    url: "https://vcsnsx-vc.infra.demo.redhat.com/ui/app/popup/datastore/urn:vmomi:Datastore:datastore-1033:3a76dcad-70e0-4775-9e3f-f7d20e1dd8f0/files"
     validate_certs: no
     method: "get"
     dest: ./server.vmx
