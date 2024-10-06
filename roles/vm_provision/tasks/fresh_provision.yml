@@ -95,7 +95,7 @@
     hostname: "{{ vcenter_hostname }}"
     datacenter: "{{ vcenter_datacenter }}"
     datastore: "{{ vm_info.instance.hw_datastores[1] }}"
-    path: '/vmfs/volumes/{{ vm_info.instance.hw_files[0] }}'
+    path: '{{ vm_info.instance.hw_files[0] }}'
     state: file
   ignore_errors: true
 
