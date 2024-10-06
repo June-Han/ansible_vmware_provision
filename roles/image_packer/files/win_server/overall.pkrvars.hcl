@@ -6,9 +6,14 @@ vm_guest_os_type = "windows2019srv_64Guest"
 // Virtual Machine Hardware Settings
 vm_firmware              = "bios"
 
+//communicator_port       = 5986
+
+iso_datastore = "[workload_share_dwPsq] WindowsServer2019.iso"
+vmtools_datastore = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso"
+
 //Setting up winrm and vmtools
 script_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1"]
-
+config_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1", "scripts/dhcp-ip.ps1", "scripts/winrm-httpv1.ps1", "scripts/winrm-httpsv1.ps1", "scripts/winrm-httpsv2.ps1"]
 
 vsphere_username        = "sandbox-qckg8@demo"
 vsphere_datastore       = "workload_share_dwPsq"

@@ -126,7 +126,6 @@
                <PlainText>true</PlainText>
             </Password>
             <Enabled>true</Enabled>
-            <LogonCount>2</LogonCount>
             <Username>${build_username}</Username>
          </AutoLogon>
          <OOBE>
@@ -170,29 +169,74 @@
                <RequiresUserInput>true</RequiresUserInput>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\windows-vmtools.ps1</CommandLine>
+               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File A:\windows-vmtools.ps1</CommandLine>
                <Order>3</Order>
                <Description>Install VMware Tools</Description>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\windows-init.ps1</CommandLine>
+               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File A:\windows-init.ps1</CommandLine>
                <Order>4</Order>
                <Description>Initial Configuration winrm</Description>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\dhcp-ip.ps1</CommandLine>
-               <Order>4</Order>
+               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File A:\dhcp-ip.ps1</CommandLine>
+               <Order>5</Order>
                <Description>Initial Configuration dhcp ip address</Description>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File A:\winrm-httpv1.ps1</CommandLine>
+               <Order>6</Order>
+               <Description>Initial Configuration winrm test</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
                <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v HideFileExt /t REG_DWORD /d 0 /f</CommandLine>
-               <Order>4</Order>
+               <Order>7</Order>
                <Description>Show file extensions in Explorer</Description>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
                <CommandLine>cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE</CommandLine>
-               <Order>10</Order>
+               <Order>8</Order>
                <Description>Disable password expiration for Administrator user</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v Start_ShowRun /t REG_DWORD /d 1 /f</CommandLine>
+               <Order>9</Order>
+               <Description>Show Run command in Start Menu</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v StartMenuAdminTools /t REG_DWORD /d 1 /f</CommandLine>
+               <Order>10</Order>
+               <Description>Show Administrative Tools in Start Menu</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\ /v HibernateFileSizePercent /t REG_DWORD /d 0 /f</CommandLine>
+               <Order>11</Order>
+               <Description>Zero Hibernation File</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\ /v HibernateEnabled /t REG_DWORD /d 0 /f</CommandLine>
+               <Order>12</Order>
+               <Description>Disable Hibernation Mode</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE</CommandLine>
+               <Order>13</Order>
+               <Description>Disable password expiration for Administrator user</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>Install-WindowsFeature Server-Gui-Mgmt-Infra,Server-Gui-Shell –Restart</CommandLine>
+               <Order>14</Order>
+               <Description>Install GUI</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>cmd.exe /c netsh advfirewall firewall add rule name="Open Port 3389" dir=in action=allow protocol=TCP localport=3389</CommandLine>
+               <Order>15</Order>
+            <Description>Enable RDP Firewall</Description>
+            </SynchronousCommand>
+            <SynchronousCommand wcm:action="add">
+               <CommandLine>%SystemRoot%\System32\reg.exe ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</CommandLine>
+               <Order>16</Order>
+            <Description>Enable RDP Registry</Description>
             </SynchronousCommand>
          </FirstLogonCommands>
       </component>

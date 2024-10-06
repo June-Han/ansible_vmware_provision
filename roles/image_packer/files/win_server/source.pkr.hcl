@@ -50,17 +50,17 @@ source "vsphere-iso" "win-server-2019-standard-core" {
         vm_guest_os_keyboard = var.vm_guest_os_keyboard
         vm_guest_os_timezone = var.vm_guest_os_timezone    
     })
-    "windows-vmtools.ps1" = "${abspath(path.root)}/scripts/windows-vmtools.ps1"
-    "windows-init.ps1" = "${abspath(path.root)}/scripts/windows-init.ps1"
-    "dhcp-ip.ps1" = "${abspath(path.root)}/scripts/dhcp-ip.ps1"
+    //"windows-vmtools.ps1" = "${abspath(path.root)}/scripts/windows-vmtools.ps1" //Will carry the local absolute path so Nope
+    //"windows-init.ps1" = "${abspath(path.root)}/scripts/windows-init.ps1"
+    //"dhcp-ip.ps1" = "${abspath(path.root)}/scripts/dhcp-ip.ps1"
     }
 
-    //floppy_files = ["./scripts/windows-vmtools.ps1", "./scripts/windows-init.ps1"]
+    floppy_files = var.config_files
 
     // Boot and Provisioning Settings
     boot_order        = var.vm_boot_order
     boot_wait         = var.vm_boot_wait
-    boot_command      = var.vm_boot_command
+    //boot_command      = var.vm_boot_command
     ip_wait_timeout   = var.common_ip_wait_timeout
     ip_settle_timeout = var.common_ip_settle_timeout
     shutdown_command  = var.vm_shutdown_command
@@ -72,11 +72,13 @@ source "vsphere-iso" "win-server-2019-standard-core" {
     winrm_password = var.build_password
     winrm_port     = var.communicator_port
     winrm_timeout  = var.communicator_timeout
+    //winrm_use_ssl = true
+    //winrm_insecure = true
 }
 
-locals {
-    iso_paths = {
-        datastore       = "[workload_share_dwPsq] WindowsServer2019.iso"
-        tools           = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso"
-    }
-}
+//locals {
+//    iso_paths = {
+//        datastore       = "[workload_share_dwPsq] WindowsServer2019.iso"
+//        tools           = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-windows-12.4.5-23787635.iso"
+//    }
+//}

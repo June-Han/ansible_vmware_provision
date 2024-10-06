@@ -325,11 +325,11 @@ variable "vm_boot_wait" {
   default     = "2s"
 }
 
-variable "vm_boot_command" {
-  type        = list(string)
-  description = "The virtual machine boot command."
-  default     = ["<spacebar>"]
-}
+//variable "vm_boot_command" {
+//  type        = list(string)
+//  description = "The virtual machine boot command."
+//  default     = ["<spacebar>"]
+//}
 
 variable "vm_shutdown_command" {
   type        = string
@@ -340,7 +340,7 @@ variable "vm_shutdown_command" {
 variable "common_ip_wait_timeout" {
   type        = string
   description = "Time to wait for guest operating system IP address response."
-  default     = "60m"
+  default     = "30m"
 }
 
 variable "common_ip_settle_timeout" {
@@ -396,7 +396,7 @@ variable "communicator_port" {
 variable "communicator_timeout" {
   type        = string
   description = "The timeout for the communicator protocol."
-  default     = "30m"
+  default     = "1h"
 }
 
 // Provisioner Settings
@@ -404,4 +404,19 @@ variable "communicator_timeout" {
 variable "script_files" {
   type    = list(string)
   description = "Specify all files and folders that need to be made available AFTER the OS install"
+}
+
+variable "config_files" {
+  type = list(string)
+  description = "Specify all files and folders to be made available as floppy files (A Drive)"
+}
+
+variable "iso_datastore" {
+  type = list(string)
+  description = "Datastore on the vSphere with ISO to mount"
+}
+
+variable "vmtools_datastore" {
+  type = list(string)
+  description = "Datastore on the vSphere with vmtools iso to mount"
 }
