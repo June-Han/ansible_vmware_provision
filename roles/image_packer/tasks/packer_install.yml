@@ -1,8 +1,5 @@
 # Installation packer
 - name: Installing dnf-utils for packer (RHEL)
-  ansible.builtin.command: sudo dnf -y install python3-dnf
-
-- name: Installing dnf-utils for packer (RHEL)
   ansible.builtin.dnf:
     name: dnf-utils
     state: present
