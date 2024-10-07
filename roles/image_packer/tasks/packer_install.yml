@@ -1,4 +1,8 @@
 # Installation packer
+- name: "Define Python Interpreter"
+  set_fact:
+    my_interpreter: "{{ ansible_python_interpreter }}"
+
 # - name: Installing dnf-utils for packer (RHEL)
 #   ansible.builtin.yum:
 #     name: dnf-utils
