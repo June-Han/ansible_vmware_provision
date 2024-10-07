@@ -5,5 +5,5 @@
     file: packer_install.yml
 
 - name: Build the VM in the vCenter
-  ansible.buildin.include_tasks:
+  ansible.builtin.include_tasks:
     file: build_vm.yml
