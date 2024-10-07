@@ -8,6 +8,7 @@
   ansible.builtin.yum_repository:
     name: hashicorp
     baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    description: hashicorp respository
 
 - name: Enabling hashicorp repository (RHEL)
   community.general.dnf_config_manager:
