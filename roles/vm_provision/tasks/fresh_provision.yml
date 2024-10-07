@@ -101,13 +101,12 @@
 
 - name: Fetch a file from the datastore
   ansible.builtin.uri:
-    url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1].split('/')[0] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}"
+    url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dcPath={{ vcenter_datacenter }}&dsName={{ vm_info.instance.hw_datastores[1]}}"
     # url: "https://vcsnsx-vc.infra.demo.redhat.com/folder/winServer2019_9/winServer2019.vmx?dsName=workload_share_yBaQN&dcPath=SDDC-Datacenter"
     # url: "https://{{ vcenter_hostname }}/folder{{ directory_path }}/{{ file_name }}?dcPath={{ datacenter }}&dsName={{ datastore }}&enc={{ enc }}"
     validate_certs: no
     method: "get"
-    src: "{{ vm_info.instance.hw_files[0].split()[1].split('/')[1] }}"
-    dest: ./server.vmx
+    dest: "./server.vmx"
 
 - name: Adding VMX Entry - floppy0.fileType
   lineinfile:
@@ -121,17 +120,17 @@
 
 - name: Removing VMX Entry - floppy0.present = "FALSE"
   lineinfile:
-    path: './server.vmx'
+    path: "./server.vmx"
     line: 'floppy0.present = "FALSE"'
     state: absent
 
 - name: Replace the file in the datastore
   community.vmware.vsphere_copy:
     hostname: '{{ vcenter_hostname }}'
-    src: ./server.vmx
+    src: "./server.vmx"
     datacenter: '{{ vcenter_datacenter }}'
     datastore: "{{ vm_info.instance.hw_datastores[1] }}"
-    path: '{{ vm_info.instance.hw_files[0].split()[1] }}'
+    path: "{{ vm_info.instance.hw_files[0].split()[1] }}"
 
 - name: Power on the virtual machine
   community.vmware.vmware_guest_powerstate:
