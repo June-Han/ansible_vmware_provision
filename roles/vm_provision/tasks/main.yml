@@ -1,10 +1,10 @@
 ---
-- name: Remove VM from the vCenter inventory
-  ansible.builtin.include_tasks:
-    file: remove_vm.yml
-  vars:
-    vm_del_name: "{{ item }}"
-  loop: "{{ del_vm_list }}"
+# - name: Remove VM from the vCenter inventory
+#   ansible.builtin.include_tasks:
+#     file: remove_vm.yml
+#   vars:
+#     vm_del_name: "{{ item }}"
+#   loop: "{{ del_vm_list }}"
 
 - name: Provision a new vm from scratch
   ansible.builtin.include_tasks:
@@ -16,12 +16,12 @@
     vmtool_iso_loc: "{{ item.vmtool_iso_loc }}"
   loop: "{{ fresh_prov_list }}"
 
-- name: Get a particular vm info 
-  ansible.builtin.include_tasks:
-    file: vm_info.yml
-  vars:
-    vminfo_name: "{{ item.fresh_prov }}"
-  loop: "{{ fresh_prov_list }}"
+# - name: Get a particular vm info 
+#   ansible.builtin.include_tasks:
+#     file: vm_info.yml
+#   vars:
+#     vminfo_name: "{{ item.fresh_prov }}"
+#   loop: "{{ fresh_prov_list }}"
 
 # - name: Debug message from AAP
 #   ansible.builtin.debug:

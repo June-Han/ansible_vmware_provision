@@ -1,53 +1,53 @@
-- name: Provision a new vm from scratch
-  community.vmware.vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    folder: "{{ vm_folder }}"
-    name: "{{ fresh_prov }}"
-    state: present
-    guest_id: "{{ fresh_os }}"
-    #esxi_hostname: #Set either esxi or cluster
-    cluster: "{{ cluster_name }}"
-    customization:
-      password: "password"
-      # runonce:
-      # - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
-      # - cmd.exe /c powershell.exe -ExecutionPolicy Unrestricted -Command  "e:\setup64 /s /v '/qb REBOOT=R'"
-      # - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
-    disk:
-    - size_gb: 2
-      type: thin
-      autoselect_datastore: true # To select the data store that is the least utilized
-      # datastore: # To manually select datastore available (written in the vars of this role)
-    hardware:
-      boot_firmware: bios
-      memory_mb: 4096
-      num_cpus: 4
-      scsi: paravirtual
-    cdrom:
-      - controller_number: 0
-        controller_type: "sata"
-        unit_number: 0
-        type: iso
-        iso_path: "{{ iso_loc }}"
-        state: present
+# - name: Provision a new vm from scratch
+#   community.vmware.vmware_guest:
+#     hostname: "{{ vcenter_hostname }}"
+#     datacenter: "{{ vcenter_datacenter }}"
+#     folder: "{{ vm_folder }}"
+#     name: "{{ fresh_prov }}"
+#     state: present
+#     guest_id: "{{ fresh_os }}"
+#     #esxi_hostname: #Set either esxi or cluster
+#     cluster: "{{ cluster_name }}"
+#     customization:
+#       password: "password"
+#       # runonce:
+#       # - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
+#       # - cmd.exe /c powershell.exe -ExecutionPolicy Unrestricted -Command  "e:\setup64 /s /v '/qb REBOOT=R'"
+#       # - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
+#     disk:
+#     - size_gb: 2
+#       type: thin
+#       autoselect_datastore: true # To select the data store that is the least utilized
+#       # datastore: # To manually select datastore available (written in the vars of this role)
+#     hardware:
+#       boot_firmware: bios
+#       memory_mb: 4096
+#       num_cpus: 4
+#       scsi: paravirtual
+#     cdrom:
+#       - controller_number: 0
+#         controller_type: "sata"
+#         unit_number: 0
+#         type: iso
+#         iso_path: "{{ iso_loc }}"
+#         state: present
       
-      - controller_number: 0
-        controller_type: "sata"
-        unit_number: 1
-        type: iso
-        iso_path: "{{ vmtool_iso_loc }}"
-        state: present
+#       - controller_number: 0
+#         controller_type: "sata"
+#         unit_number: 1
+#         type: iso
+#         iso_path: "{{ vmtool_iso_loc }}"
+#         state: present
 
-    networks:
-    - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
-      mac: "{{ network_vars['mac']}}"
-      #ip:  #Used to set static IP
-      #netmask: #Used to set static netmask required for ip
-      device_type: vmxnet3 #vmxnet3 by default
-    #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
-    #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
-  register: deploy_vm
+#     networks:
+#     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+#       mac: "{{ network_vars['mac']}}"
+#       #ip:  #Used to set static IP
+#       #netmask: #Used to set static netmask required for ip
+#       device_type: vmxnet3 #vmxnet3 by default
+#     #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
+#     #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
+#   register: deploy_vm
 
 # - name: install vmware tools via Chocolatey
 #   win_chocolatey: 
@@ -101,10 +101,12 @@
 
 - name: Fetch a file from the datastore
   ansible.builtin.uri:
-    # url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}"
-    url: "https://vcsnsx-vc.infra.demo.redhat.com/ui/app/popup/datastore/urn:vmomi:Datastore:datastore-1033:3a76dcad-70e0-4775-9e3f-f7d20e1dd8f0/files"
+    url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1].split('/')[0] }}?dsName={{ vm_info.instance.hw_datastores[1]}}&dcPath={{ vcenter_datacenter }}"
+    # url: "https://vcsnsx-vc.infra.demo.redhat.com/folder/winServer2019_9/winServer2019.vmx?dsName=workload_share_yBaQN&dcPath=SDDC-Datacenter"
+    # url: "https://{{ vcenter_hostname }}/folder{{ directory_path }}/{{ file_name }}?dcPath={{ datacenter }}&dsName={{ datastore }}&enc={{ enc }}"
     validate_certs: no
     method: "get"
+    src: "{{ vm_info.instance.hw_files[0].split()[1].split('/')[1] }}"
     dest: ./server.vmx
 
 - name: Adding VMX Entry - floppy0.fileType
