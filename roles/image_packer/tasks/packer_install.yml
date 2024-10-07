@@ -1,6 +1,5 @@
 # Installation packer
 - name: Handling packages
-  hosts: all
   block:
     - name: Installing dnf-utils for packer (RHEL)
       ansible.builtin.dnf:
@@ -25,3 +24,6 @@
         name: packer
         state: present
       delegate_to: localhost
+  become: true
+  become_user: root
+  delegate_to: localhost
