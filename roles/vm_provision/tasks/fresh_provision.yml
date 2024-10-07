@@ -1,53 +1,53 @@
-# - name: Provision a new vm from scratch
-#   community.vmware.vmware_guest:
-#     hostname: "{{ vcenter_hostname }}"
-#     datacenter: "{{ vcenter_datacenter }}"
-#     folder: "{{ vm_folder }}"
-#     name: "{{ fresh_prov }}"
-#     state: poweredon
-#     guest_id: "{{ fresh_os }}"
-#     #esxi_hostname: #Set either esxi or cluster
-#     cluster: "{{ cluster_name }}"
-#     customization:
-#       password: "password"
-#       # runonce:
-#       # - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
-#       # - cmd.exe /c powershell.exe -ExecutionPolicy Unrestricted -Command  "e:\setup64 /s /v '/qb REBOOT=R'"
-#       # - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
-#     disk:
-#     - size_gb: 2
-#       type: thin
-#       autoselect_datastore: true # To select the data store that is the least utilized
-#       # datastore: # To manually select datastore available (written in the vars of this role)
-#     hardware:
-#       boot_firmware: bios
-#       memory_mb: 4096
-#       num_cpus: 4
-#       scsi: paravirtual
-#     cdrom:
-#       - controller_number: 0
-#         controller_type: "sata"
-#         unit_number: 0
-#         type: iso
-#         iso_path: "{{ iso_loc }}"
-#         state: present
+- name: Provision a new vm from scratch
+  community.vmware.vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    folder: "{{ vm_folder }}"
+    name: "{{ fresh_prov }}"
+    state: present
+    guest_id: "{{ fresh_os }}"
+    #esxi_hostname: #Set either esxi or cluster
+    cluster: "{{ cluster_name }}"
+    customization:
+      password: "password"
+      # runonce:
+      # - cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force"
+      # - cmd.exe /c powershell.exe -ExecutionPolicy Unrestricted -Command  "e:\setup64 /s /v '/qb REBOOT=R'"
+      # - cmd.exe /c wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
+    disk:
+    - size_gb: 2
+      type: thin
+      autoselect_datastore: true # To select the data store that is the least utilized
+      # datastore: # To manually select datastore available (written in the vars of this role)
+    hardware:
+      boot_firmware: bios
+      memory_mb: 4096
+      num_cpus: 4
+      scsi: paravirtual
+    cdrom:
+      - controller_number: 0
+        controller_type: "sata"
+        unit_number: 0
+        type: iso
+        iso_path: "{{ iso_loc }}"
+        state: present
       
-#       - controller_number: 0
-#         controller_type: "sata"
-#         unit_number: 1
-#         type: iso
-#         iso_path: "{{ vmtool_iso_loc }}"
-#         state: present
+      - controller_number: 0
+        controller_type: "sata"
+        unit_number: 1
+        type: iso
+        iso_path: "{{ vmtool_iso_loc }}"
+        state: present
 
-#     networks:
-#     - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
-#       mac: "{{ network_vars['mac']}}"
-#       #ip:  #Used to set static IP
-#       #netmask: #Used to set static netmask required for ip
-#       device_type: vmxnet3 #vmxnet3 by default
-#     #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
-#     #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
-#   register: deploy_vm
+    networks:
+    - name: "{{ network_vars['name'] }}" #Name of the portgroup or distributed virtual portgroup for this interface.
+      mac: "{{ network_vars['mac']}}"
+      #ip:  #Used to set static IP
+      #netmask: #Used to set static netmask required for ip
+      device_type: vmxnet3 #vmxnet3 by default
+    #wait_for_ip_address: true  #Wait until vCenter detects an IP address for the virtual machine. (vmware-tools needs to be installed)
+    #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
+  register: deploy_vm
 
 # - name: install vmware tools via Chocolatey
 #   win_chocolatey: 
@@ -131,6 +131,12 @@
     datastore: "{{ vm_info.instance.hw_datastores[1] }}"
     path: '{{ vm_info.instance.hw_files[0].split()[1] }}'
 
+- name: Power on the virtual machine
+  community.vmware.vmware_guest_powerstate:
+    hostname: "{{ vcenter_hostname }}"
+    folder: "{{ vm_folder }}"
+    name: "{{ fresh_prov }}"
+    state: powered-on
 
 # - name: Create a directory inside the vm
 #   community.vmware.vmware_guest_file_operation:
