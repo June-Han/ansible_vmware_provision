@@ -49,18 +49,6 @@
 #     #wait_for_ip_address_timeout: 600  #Define a timeout (in seconds) for the wait_for_ip_address parameter.
 #   register: deploy_vm
 
-# - name: install vmware tools via Chocolatey
-#   win_chocolatey: 
-#     name: vmware-tools 
-#     state: latest
-#   when: ansible_os_family == "Windows"
-
-# - name: install vmware tools via dnf
-#   ansible.builtin.dnf:
-#     name: vmware-tools
-#     state: latest
-#   when: ansible_os_family == "RedHat"
-
 - name: Change virtual machine's boot order and related parameters
   community.vmware.vmware_guest_boot_manager:
     hostname: "{{ vcenter_hostname }}"
@@ -139,6 +127,27 @@
     name: "{{ fresh_prov }}"
     state: powered-on
 
+# ################################ If SSH is allowed ############################################
+# - name: Adding VMX Entry - floppy0.fileType
+#   lineinfile:
+#     path: '/vmfs/volumes/{{ esxi_datastore }}/{{ vm_name }}/{{ vm_name }}.vmx'
+#     line: 'floppy0.fileType = "file"'
+#   delegate_to: '{{ esxi_address }}'
+
+# - name: Adding VMX Entry - floppy0.fileName
+#   lineinfile:
+#     path: '/vmfs/volumes/{{ esxi_datastore }}/{{ vm_name }}/{{ vm_name }}.vmx'
+#     line: 'floppy0.fileName = "/vmfs/volumes/{{ esxi_datastore }}/{{ windows_flp }}"'
+#   delegate_to: '{{ esxi_address }}'
+
+# - name: Removing VMX Entry - floppy0.present = "FALSE"
+#   lineinfile:
+#     path: '/vmfs/volumes/{{ esxi_datastore }}/{{ vm_name }}/{{ vm_name }}.vmx'
+#     line: 'floppy0.present = "FALSE"'
+#     state: absent
+#   delegate_to: '{{ esxi_address }}'
+
+# ################## If the OS is installed and script can be transferred to the VM ##################
 # - name: Create a directory inside the vm
 #   community.vmware.vmware_guest_file_operation:
 #     hostname: "{{ vcenter_hostname }}"

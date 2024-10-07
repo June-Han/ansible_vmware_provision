@@ -2,3 +2,4 @@ collections:
   - community.vmware
   - chocolatey.chocolatey
   - community.general
+  - ansible.posix
