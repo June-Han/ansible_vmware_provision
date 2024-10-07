@@ -3,6 +3,26 @@
   hosts: localhost
   gather_facts: true
   tasks:
+    - name: Installing dnf-utils for packer (RHEL)
+      ansible.builtin.dnf:
+        name: dnf-utils
+        state: present
+
+    - name: Add in hashicorp repository (RHEL)
+      yum_respository:
+        name: hashicorp
+        baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+
+    - name: Enabling hashicorp repository (RHEL)
+      community.general.dnf_config_manager:
+        name: hashicorp
+        state: enabled
+
+    - name: Installing packer from the new repo (RHEL)
+      ansible.builtin.dnf:
+        name: packer
+        state: present
+
     - name: Include VM provisioning role
       ansible.builtin.include_role:
         name: image_packer

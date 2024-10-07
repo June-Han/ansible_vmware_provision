@@ -1,8 +1,8 @@
 ---
 # Configuring Packer and running the image
-- name: Remove VM from the vCenter inventory
-  ansible.builtin.include_tasks:
-    file: packer_install.yml
+# - name: Remove VM from the vCenter inventory
+#   ansible.builtin.include_tasks:
+#     file: packer_install.yml
 
 - name: Build the VM in the vCenter
   ansible.builtin.include_tasks:
