@@ -5,7 +5,7 @@
     state: present
 
 - name: Add in hashicorp repository (RHEL)
-  ansible.builtin.yum_respository:
+  yum_respository:
     name: hashicorp
     baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 
