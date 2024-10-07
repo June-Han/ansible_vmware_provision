@@ -66,7 +66,7 @@
     hostname: "{{ vcenter_hostname }}"
     name: "{{ fresh_prov }}"
     boot_delay: 2000
-    enter_bios_setup: true
+    enter_bios_setup: false
     boot_retry_enabled: true
     boot_retry_delay: 22300
     boot_firmware: bios
