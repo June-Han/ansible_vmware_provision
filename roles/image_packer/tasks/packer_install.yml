@@ -3,19 +3,23 @@
   ansible.builtin.yum:
     name: dnf-utils
     state: present
+  delegate_to: localhost
 
 - name: Add in hashicorp repository (RHEL)
   ansible.builtin.yum_repository:
     name: hashicorp
     baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
     description: hashicorp respository
+  delegate_to: localhost
 
 - name: Enabling hashicorp repository (RHEL)
   community.general.dnf_config_manager:
     name: hashicorp
     state: enabled
+  delegate_to: localhost
 
 - name: Installing packer from the new repo (RHEL)
   ansible.builtin.yum:
     name: packer
     state: present
+  delegate_to: localhost
