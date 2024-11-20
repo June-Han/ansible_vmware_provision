@@ -90,7 +90,7 @@
 - name: Fetch a file from the datastore
   ansible.builtin.uri:
     # url: "https://{{ vcenter_hostname }}/folder{{ directory_path }}/{{ file_name }}?dcPath={{ datacenter }}&dsName={{ datastore }}&enc={{ enc }}" #Example
-    # url: "https://vcsnsx-vc.infra.demo.redhat.com/folder/winServer2019_9/winServer2019.vmx?dsName=workload_share_yBaQN&dcPath=SDDC-Datacenter" #Actual link
+    # url: "https://abc.demo.com/folder/winServer2019_9/winServer2019.vmx?dsName=workload_share_efg&dcPath=ABC_Datacenter" #Actual link
     url: "https://{{ vcenter_hostname }}/folder/{{ vm_info.instance.hw_files[0].split()[1] }}?dcPath={{ vcenter_datacenter }}&dsName={{ vm_info.instance.hw_datastores[1]}}"
     validate_certs: no
     method: "get"

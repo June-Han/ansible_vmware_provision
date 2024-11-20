@@ -10,7 +10,7 @@ podman tag 0d120b6ccaae my-image:v2
 
 
 //pip version 22 only have ansible-core up to 2.15
-[junehan@fedora ansible_vmware_provision]$ export VMWARE_HOST=vcsnsx-vc.infra.demo.redhat.com
-[junehan@fedora ansible_vmware_provision]$ export VMWARE_USER=sandbox-qckg8@demo
-[junehan@fedora ansible_vmware_provision]$ export VMWARE_PASSWORD=eu.iLk-6FLL6
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_HOST=abc.infra.com
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_USER=sandbox-abc
+[junehan@fedora ansible_vmware_provision]$ export VMWARE_PASSWORD=abcdfg
 [junehan@fedora ansible_vmware_provision]$ ansible-navigator run main.yml --eei localhost/ee-vmware:v1.0.0 --mode stdout --penv VMWARE_HOST --penv VMWARE_USER --penv VMWARE_PASSWORD

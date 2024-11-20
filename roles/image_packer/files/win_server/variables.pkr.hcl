@@ -1,6 +1,6 @@
 variable "vsphere_endpoint" {
   type        = string
-  default     = "vcsnsx-vc.infra.demo.redhat.com"
+  default     = "abc.infra.demo.com"
   description = "The fully qualified domain name or IP address of the vCenter Server instance."
 }
 
