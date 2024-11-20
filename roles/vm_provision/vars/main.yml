@@ -1,7 +1,7 @@
 ---
 # vars file for vm_provision/ vm info
 vcenter_hostname: vmexample.infra.demo.com
-vcenter_datacenter: unknown_datacenter
+vcenter_datacenter: unknown_Dc
 vcenter_validate_certs: false
 vm_folder: Workloads/sandbox-abc
 
