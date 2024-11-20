@@ -206,7 +206,7 @@ variable "vm_network_card" {
 variable "mac_address" {
   type        = string
   description = "The VM mac address."
-  default     = "00:50:56:83:3a:5d"
+  default     = "00:12:34:56:7a:1d"
 }
 
 variable "common_vm_version" {
