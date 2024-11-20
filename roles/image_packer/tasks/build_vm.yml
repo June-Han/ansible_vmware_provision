@@ -1,5 +1,5 @@
 - name: Initiate packer
-  ansible.builtin.command: packer init files/win_server/
+  ansible.builtin.shell: packer init files/win_server/
 
 - name: Build packer image in vCenter
-  ansible.builtin.command: packer build -var-file="files/win_server/overall.pkrvars.hcl" files/win_server
+  ansible.builtin.shell: packer build -var-file="files/win_server/overall.pkrvars.hcl" files/win_server

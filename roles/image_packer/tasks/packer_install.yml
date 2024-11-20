@@ -1,23 +1,32 @@
 # Installation packer
 - name: Installing dnf-utils for packer (RHEL)
-  ansible.builtin.command: /usr/bin/yum install -y python3-dnf
-
-- name: Installing dnf-utils for packer (RHEL)
   ansible.builtin.dnf:
     name: dnf-utils
     state: present
-  delegate_to: localhost
 
 - name: Add in hashicorp repository (RHEL)
   ansible.builtin.yum_repository:
     name: hashicorp
     baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-    description: hashicorp respository
+    description: hashicorp repository
     enabled: true
-  delegate_to: localhost
+
+- name: Change hashicorp repo
+  # ansible.builtin.command: sed -i 's/$releasever/9/' /etc/yum.repos.d/hashicorp.repo
+  lineinfile:
+    path: /etc/yum.repos.d/hashicorp.repo
+    regexp: '^https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable$' 
+    line: 'https://rpm.releases.hashicorp.com/RHEL/9/$basearch/stable'
+
+# - name: Change hashicorp repo
+#   # ansible.builtin.command: sed -i 's/$releasever/9/' /etc/yum.repos.d/hashicorp.repo
+#   lineinfile:
+#     path: /etc/yum.repos.d/hashicorp.repo
+#     regexp: '^https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/test$' 
+#     line: 'https://rpm.releases.hashicorp.com/RHEL/9/$basearch/stable'
 
 - name: Installing packer from the new repo (RHEL)
   ansible.builtin.dnf:
     name: packer
     state: present
-  delegate_to: localhost
+  become: true

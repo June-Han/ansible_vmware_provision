@@ -1,28 +1,28 @@
 ---
 # vars file for vm_provision/ vm info
-vcenter_hostname: vcsnsx-vc.infra.demo.redhat.com
-vcenter_datacenter: SDDC-Datacenter
+vcenter_hostname: vmexample.infra.demo.com
+vcenter_datacenter: unknown_datacenter
 vcenter_validate_certs: false
-vm_folder: Workloads/sandbox-qckg8
+vm_folder: Workloads/sandbox-abc
 
 # List of Hypervisors in the redhat demo (Open Env)
-esxi_host1: esxi-01000.infra.demo.redhat.com
-esxi_host2: esxi-01001.infra.demo.redhat.com
-esxi_host3: esxi-01002.infra.demo.redhat.com
+esxi_host1: esxi01.infra.com
+esxi_host2: esxi02.infra.com
+esxi_host3: esxi03.infra.com
 
 # List of datastores in the redhat demo (Open Env)
-datastore1: workload_share_dwPsq
-datastore2: workload_share_FZZZD
-datastore3: workload_share_Q6pSF
-datastore4: workload_share_SYmuF
-datastore5: workload_share_yBaQN
+datastore1: workload_share_1
+datastore2: workload_share_2
+datastore3: workload_share_3
+datastore4: workload_share_4
+datastore5: workload_share_5
 
 # Cluster name (Open Env)
 cluster_name: Cluster-1
 
 # Network variables (dictionary)
 network_vars:
-    name: segment-sandbox-qckg8 #segment-sandbox-qzqxj
-    mac: 00:50:56:8e:11:44 #00:50:56:8e:36:d5
+    name: sandbox-abc #segment-sandbox-qzqxj
+    mac: 00:ab:11:cd:12:15
 
 clone_list: "{{ fresh_prov_list | zip(template_prov_list) }}"

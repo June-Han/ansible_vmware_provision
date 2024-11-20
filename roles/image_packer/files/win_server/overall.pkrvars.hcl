@@ -13,7 +13,7 @@ vmtools_datastore = "[workload_share_dwPsq] vmware_tools_windows/VMware-tools-wi
 
 //Setting up winrm and vmtools
 script_files            = ["files/win_server/scripts/windows-vmtools.ps1", "files/win_server/scripts/windows-init.ps1"]
-config_files            = ["scripts/windows-vmtools.ps1", "scripts/windows-init.ps1", "scripts/dhcp-ip.ps1", "scripts/winrm-httpv1.ps1", "scripts/winrm-httpsv1.ps1", "scripts/winrm-httpsv2.ps1"]
+config_files            = ["files/win_server/scripts/windows-vmtools.ps1", "files/win_server/scripts/windows-init.ps1", "files/win_server/scripts/dhcp-ip.ps1", "files/win_server/scripts/winrm-httpv1.ps1", "files/win_server/scripts/winrm-httpsv1.ps1", "files/win_server/scripts/winrm-httpsv2.ps1"]
 
 vsphere_username        = "sandbox-qckg8@demo"
 vsphere_datastore       = "workload_share_dwPsq"
